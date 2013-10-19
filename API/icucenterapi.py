@@ -18,7 +18,7 @@ class ICUServerFactory(protocol.Factory):
 		self.ack_callback = gui_ack_callback
 
 	def buildProtocol(self, addr):
-		return CTICenter(self.port, self.rcv_callback, self.ack_callback)
+		return ICUCenter(self.port, self.rcv_callback, self.ack_callback)
 
 	def start(self, gui_reactor):
 		gui_reactor.listenTCP(self.port, self)

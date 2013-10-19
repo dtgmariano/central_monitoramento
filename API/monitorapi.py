@@ -18,7 +18,7 @@ class ICUMonitorFactory(protocol.ClientFactory):
 		self.objmonit = None
 
 	def buildProtocol(self, addr):
-		return CTIMonitor(self.msg_callback)
+		return ICUMonitor(self.msg_callback)
 
 	def sendmsg(self, gui_reactor):
 		gui_reactor.connectTCP(self.ip, self.port, self)
