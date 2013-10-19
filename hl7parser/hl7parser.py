@@ -55,7 +55,7 @@ class obr(hl7_segment):
 		subparts1 = parts[2].split('^')
 		subparts2 = parts[3].split('^')
 		subparts3 = parts[4].split('^')
-		return obr(int(parts[1]),(int(subparts1[0]),subparts1[1]),(int(subparts2[0]),subparts2[1]), int(subparts3[0]))
+		return obr(int(parts[1]),(subparts1[0],subparts1[1]),(subparts2[0],subparts2[1]), int(subparts3[0]))
 
 class obx(hl7_segment):
 	def __init__(self, seq_num, obx_type, cod, obx_subtype, chn_number, data):
