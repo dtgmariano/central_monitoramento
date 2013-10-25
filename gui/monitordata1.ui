@@ -35,7 +35,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_paciente.png</pixmap>
+       <pixmap>icones/img_paciente.png</pixmap>
       </property>
      </widget>
     </item>
@@ -51,7 +51,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_monitor1.png</pixmap>
+       <pixmap>icones/img_monitor1.png</pixmap>
       </property>
      </widget>
     </item>
@@ -67,7 +67,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_ecg0.png</pixmap>
+       <pixmap>icones/img_ecg0.png</pixmap>
       </property>
      </widget>
     </item>
@@ -125,7 +125,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_pressao1.png</pixmap>
+       <pixmap>icones/img_pressao1.png</pixmap>
       </property>
      </widget>
     </item>
@@ -141,7 +141,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_alert.png</pixmap>
+       <pixmap>icones/img_alert.png</pixmap>
       </property>
      </widget>
     </item>
@@ -157,7 +157,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_alert.png</pixmap>
+       <pixmap>icones/img_alert.png</pixmap>
       </property>
      </widget>
     </item>
@@ -215,7 +215,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_spo.png</pixmap>
+       <pixmap>icones/img_spo.png</pixmap>
       </property>
      </widget>
     </item>
@@ -276,7 +276,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_alert.png</pixmap>
+       <pixmap>icones/img_alert.png</pixmap>
       </property>
      </widget>
     </item>
@@ -292,7 +292,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_temperatura2.png</pixmap>
+       <pixmap>icones/img_temperatura2.png</pixmap>
       </property>
      </widget>
     </item>
@@ -308,7 +308,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_fc.png</pixmap>
+       <pixmap>icones/img_fc.png</pixmap>
       </property>
      </widget>
     </item>
@@ -324,7 +324,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_alert.png</pixmap>
+       <pixmap>icones/img_alert.png</pixmap>
       </property>
      </widget>
     </item>
@@ -362,7 +362,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>img_lupa1.png</normaloff>img_lupa1.png</iconset>
+        <normaloff>icones/img_lupa1.png</normaloff>icones/img_lupa1.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -384,7 +384,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>img_alert.png</pixmap>
+       <pixmap>icones/img_alert.png</pixmap>
       </property>
      </widget>
     </item>
