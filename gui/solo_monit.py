@@ -1,11 +1,11 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-from solo_monitp import Ui_SoloMonitForm
+from solo_monit_gui import Ui_SoloMonitForm
 import math
 
-class MyWindow(QWidget):
+class MonitForm(QWidget):
 	def __init__(self, parent = None):
-		super(MyWindow, self).__init__(parent)
+		super(MonitForm, self).__init__(parent)
 		self.ui = Ui_SoloMonitForm()
 		self.ui.setupUi(self)
 		self.t = range(0,100)
@@ -23,16 +23,20 @@ class MyWindow(QWidget):
 		self.ui.lblnibp.setPalette(self.pal)
 		self.pal.setColor(QPalette.Foreground, Qt.red)
 		self.ui.lbltemp.setPalette(self.pal)
-		self.hideAlarms()
+		self.ui.alarmePanel.hide()
+		self.ui.parametrosPanel.setStyleSheet("background-color:black;");
+		#self.hideAlarms()
 		self.ui.btnalarm.clicked.connect(self.toggleAlarms)
 		self.hidden = True
 	
 	def toggleAlarms(self):
 		if self.hidden == True:
-			self.showAlarms()
+			self.ui.alarmePanel.show()
+			#self.showAlarms()
 			self.hidden = False
 		else:
-			self.hideAlarms()
+			self.ui.alarmePanel.hide()
+			#self.hideAlarms()
 			self.hidden = True
 
 	def showAlarms(self):
@@ -46,6 +50,6 @@ class MyWindow(QWidget):
 if __name__ == "__main__":
 	import sys
 	app = QApplication(sys.argv)
-	wind = MyWindow()
+	wind = MonitForm()
 	wind.show()
 	app.exec_()

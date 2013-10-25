@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Fri Oct 25 19:10:03 2013
+# Created: Fri Oct 25 19:43:31 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -20,8 +20,8 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 600)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        self.horizontalLayout = QtGui.QHBoxLayout(self.centralwidget)
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.tabWidget = QtGui.QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
         self.tabGroup = QtGui.QWidget()
@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(_fromUtf8("icones/settings.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.tabConfig, icon2, _fromUtf8(""))
-        self.horizontalLayout.addWidget(self.tabWidget)
+        self.verticalLayout.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
@@ -60,7 +60,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuConex_o.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
