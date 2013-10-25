@@ -1,5 +1,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+import pyqtgraph as pg
+import numpy as np
 from monitgui1 import Ui_MonitForm
 import math
 import time
