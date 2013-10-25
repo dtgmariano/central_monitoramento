@@ -18,12 +18,12 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabGroup">
        <attribute name="icon">
         <iconset>
-         <normaloff>../../../qtcreator-2.8.1/1382743337_group_half.png</normaloff>../../../qtcreator-2.8.1/1382743337_group_half.png</iconset>
+         <normaloff>icones/group.png</normaloff>icones/group.png</iconset>
        </attribute>
        <attribute name="title">
         <string>Monitores</string>
@@ -32,7 +32,7 @@
       <widget class="QWidget" name="tabPacient">
        <attribute name="icon">
         <iconset>
-         <normaloff>../../../qtcreator-2.8.1/1382743337_single_half.png</normaloff>../../../qtcreator-2.8.1/1382743337_single_half.png</iconset>
+         <normaloff>icones/single.png</normaloff>icones/single.png</iconset>
        </attribute>
        <attribute name="title">
         <string>Paciente</string>
@@ -41,7 +41,7 @@
       <widget class="QWidget" name="tabConfig">
        <attribute name="icon">
         <iconset>
-         <normaloff>../../../qtcreator-2.8.1/1382743345_settings.png</normaloff>../../../qtcreator-2.8.1/1382743345_settings.png</iconset>
+         <normaloff>icones/settings.png</normaloff>icones/settings.png</iconset>
        </attribute>
        <attribute name="title">
         <string>Configurações</string>
