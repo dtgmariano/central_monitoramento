@@ -1,4 +1,4 @@
-from twisted.internet import protocol, reactor
+from twisted.internet import protocol
 
 class ICUCenter(protocol.Protocol):
 

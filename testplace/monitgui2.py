@@ -48,6 +48,5 @@ if __name__ == "__main__":
 	import sys
 	app = QApplication(sys.argv)
 	frm = MyMonitor()
-	#frm.t1.start()
 	frm.show()
 	app.exec_()

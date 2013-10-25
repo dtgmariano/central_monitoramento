@@ -47,6 +47,9 @@
    </item>
    <item>
     <widget class="QScrollArea" name="scrolll">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
