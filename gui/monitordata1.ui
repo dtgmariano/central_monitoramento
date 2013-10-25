@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>575</width>
-    <height>546</height>
+    <width>225</width>
+    <height>288</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -158,29 +158,6 @@
       </property>
       <property name="pixmap">
        <pixmap>img_alert.png</pixmap>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="2">
-     <widget class="QPushButton" name="btDetalhes">
-      <property name="maximumSize">
-       <size>
-        <width>32</width>
-        <height>32</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>img_lupa1.png</normaloff>img_lupa1.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>30</width>
-        <height>30</height>
-       </size>
       </property>
      </widget>
     </item>
@@ -369,6 +346,45 @@
       </property>
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;01&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="btDetalhes">
+      <property name="maximumSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>img_lupa1.png</normaloff>img_lupa1.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>30</width>
+        <height>30</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="2">
+     <widget class="QLabel" name="alertECGStatus">
+      <property name="maximumSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>img_alert.png</pixmap>
       </property>
      </widget>
     </item>
