@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="tabGroup">
+       <attribute name="icon">
+        <iconset>
+         <normaloff>../../../qtcreator-2.8.1/1382743337_group_half.png</normaloff>../../../qtcreator-2.8.1/1382743337_group_half.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Monitores</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabPacient">
+       <attribute name="icon">
+        <iconset>
+         <normaloff>../../../qtcreator-2.8.1/1382743337_single_half.png</normaloff>../../../qtcreator-2.8.1/1382743337_single_half.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Paciente</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabConfig">
+       <attribute name="icon">
+        <iconset>
+         <normaloff>../../../qtcreator-2.8.1/1382743345_settings.png</normaloff>../../../qtcreator-2.8.1/1382743345_settings.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Configurações</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuConex_o">
+    <property name="title">
+     <string>Conexão</string>
+    </property>
+    <addaction name="actionAbrir"/>
+    <addaction name="actionFechar"/>
+   </widget>
+   <addaction name="menuConex_o"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAbrir">
+   <property name="text">
+    <string>Abrir</string>
+   </property>
+  </action>
+  <action name="actionFechar">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Fechar</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
