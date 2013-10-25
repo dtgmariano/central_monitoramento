@@ -1,6 +1,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from solo_monit_gui import Ui_SoloMonitForm
+from alarms import AlarmForm
 import math
 
 class MonitForm(QWidget):
@@ -23,6 +24,8 @@ class MonitForm(QWidget):
 		self.ui.lblnibp.setPalette(self.pal)
 		self.pal.setColor(QPalette.Foreground, Qt.red)
 		self.ui.lbltemp.setPalette(self.pal)
+		self.alarmForm = AlarmForm()
+		self.alarmForm.setParent(self.ui.alarmePanel)
 		self.ui.alarmePanel.hide()
 		self.ui.parametrosPanel.setStyleSheet("background-color:black;");
 		#self.hideAlarms()

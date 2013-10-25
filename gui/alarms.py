@@ -7,6 +7,10 @@ class AlarmForm(QWidget):
 		super(AlarmForm, self).__init__(parent)
 		self.ui = Ui_AlarmsForm()
 		self.ui.setupUi(self)
+	def setParent(self,parent):
+		verticalLayout = QVBoxLayout(parent)
+		alarmForm = AlarmForm()
+		verticalLayout.addWidget(alarmForm)
 
 if __name__ == "__main__":
 	import sys
