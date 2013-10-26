@@ -4,7 +4,7 @@ sys.path.insert(0, '../geradores')
 sys.path.insert(0, '../hl7parser')
 sys.path.insert(0, '../monitor')
 
-from hl7parser import patient, measure, channel, oru_wav
+from hl7parser import patient, measure, channel, oru_wav, oru_wav_factory, patient_factory
 from monitsim_gui import Ui_MonitSimForm
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -23,12 +23,30 @@ class MonitSim(QWidget):
 		self.port = qtport
 		self.ui = Ui_MonitSimForm()
 		self.ui.setupUi(self)
+		#This region sets the background black and changes the color or each parameter label
+		'''
+		self.pal = QPalette()
+		self.pal.setColor(QPalette.Background, Qt.black)
+		self.setPalette(self.pal)
+		self.pal.setColor(QPalette.Foreground, Qt.blue)
+		self.ui.lbO2.setPalette(self.pal)
+		self.pal.setColor(QPalette.Foreground, Qt.red)
+		self.ui.lbTemperatura.setPalette(self.pal)
+		self.pal.setColor(QPalette.Foreground, Qt.yellow)
+		self.ui.lbPressao.setPalette(self.pal)
+		self.pal.setColor(QPalette.Foreground, Qt.green)
+		self.ui.lbFC.setPalette(self.pal)
+		'''
 		self.smsg = None
 		self.x = []
 		self.y = []
 		self.monit = monitor_multi(ip)
 		#Twisted client api
 		self.monitw = ICUMonitorFactory(self.setmsg, self.ip, self.port) #Create client
+		#ECG chart
+		self.count1 = 0
+		self.xax = []
+		self.yax = []
 
 	#Message that is sent to the icu center. HL7 format
 	def setmsg(self):		
@@ -36,15 +54,41 @@ class MonitSim(QWidget):
 	
 	#Initiates the monitor
 	def turnOn(self):
-		LoopingCall(self.genMeasure).start(0.3) #Starts function that generates measures
-		self.monitw.startsend(self.reactor, 0.3) #Starts function that sends data to the icu center
+		LoopingCall(self.genMeasure).start(0.1) #Starts function that generates measures
+		self.monitw.startsend(self.reactor, 0.1) #Starts function that sends data to the icu center
 
 	#Generates new measures from the patient
 	def genMeasure(self):
 		self.monit.preenche() 
 		orw = self.monit.get_orw((self.ip, 'CEN'))
 		self.smsg = orw.to_str()
-		print self.smsg
+		#print self.smsg
+		#self.ui.lbTemperatura.setText(str(self.monit.monitored.measures[0].channels[0].data) + "C")
+		strTemp = str(self.monit.monitored.measures[0].channels[0].data).strip('[]')
+		strO2 = str(self.monit.monitored.measures[2].channels[0].data).strip('[]')
+		strFc = str(self.monit.monitored.measures[3].channels[0].data).strip('[]')
+		strSys = str(self.monit.monitored.measures[1].channels[0].data).strip('[]')
+		strDys = str(self.monit.monitored.measures[1].channels[1].data).strip('[]')
+		self.ui.lbTemperatura.setText(strTemp)
+		self.ui.lbO2.setText(strO2)
+		self.ui.lbFC.setText(strFc)
+		self.ui.lbPressao.setText(strSys + '/' + strDys)
+		for val in self.monit.monitored.measures[4].channels[0].data:			
+			self.xax.append(self.count1)
+			self.yax.append(val)
+			self.count1+=1
+		self.ui.ecgChart.plot(self.xax, self.yax, clear = True)
+		if self.count1 > 5000:
+			self.count1 = 0
+			self.xax = []
+			self.yax = []
+
+	 	#print self.monit.monitored.measures[0].channels[0].descricao
+		#print self.monit.monitored.measures[1].channels[1].descricao
+		#print self.monit.monitored.measures[2].channels[0].descricao
+		#print self.monit.monitored.measures[3].channels[0].descricao
+		#print self.monit.monitored.measures[4].channels[0].descricao
+
 		
 if __name__ ==  "__main__":
 	app = QApplication(sys.argv)
