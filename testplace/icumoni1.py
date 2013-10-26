@@ -21,6 +21,8 @@ class MyMonitor(QDialog):
 		self.reactor = qtreactor
 		self.ip = qtip
 		self.port = qtport
+		self.ui = Ui_MonitForm()
+		self.ui.setupUi(self)
 		self.smsg = None
 		self.x = []
 		self.y = []
