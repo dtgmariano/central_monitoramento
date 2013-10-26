@@ -62,32 +62,32 @@ class MonitSim(QWidget):
 		self.monit.preenche() 
 		orw = self.monit.get_orw((self.ip, 'CEN'))
 		self.smsg = orw.to_str()
-		#print self.smsg
-		#self.ui.lbTemperatura.setText(str(self.monit.monitored.measures[0].channels[0].data) + "C")
-		strTemp = str(self.monit.monitored.measures[0].channels[0].data).strip('[]')
-		strO2 = str(self.monit.monitored.measures[2].channels[0].data).strip('[]')
-		strFc = str(self.monit.monitored.measures[3].channels[0].data).strip('[]')
-		strSys = str(self.monit.monitored.measures[1].channels[0].data).strip('[]')
-		strDys = str(self.monit.monitored.measures[1].channels[1].data).strip('[]')
-		self.ui.lbTemperatura.setText(strTemp)
+
+		#Creates strings with the measures
+		strTemp = str(self.monit.monitored.measures[0].channels[0].data).strip('[]') #Temp
+		strO2 = str(self.monit.monitored.measures[2].channels[0].data).strip('[]') #SpO2
+		strFc = str(self.monit.monitored.measures[3].channels[0].data).strip('[]') #BPM
+		strSys = str(self.monit.monitored.measures[1].channels[0].data).strip('[]') #Systolic
+		strDys = str(self.monit.monitored.measures[1].channels[1].data).strip('[]') #Dyastolic
+
+		#Updates the labels for showing the measures
+		self.ui.lbTemperatura.setText(strTemp) 
 		self.ui.lbO2.setText(strO2)
 		self.ui.lbFC.setText(strFc)
 		self.ui.lbPressao.setText(strSys + '/' + strDys)
+
+		#Plotting
+		#creates Xaxis and Yaxis
 		for val in self.monit.monitored.measures[4].channels[0].data:			
 			self.xax.append(self.count1)
 			self.yax.append(val)
 			self.count1+=1
-		self.ui.ecgChart.plot(self.xax, self.yax, clear = True)
+		self.ui.ecgChart.plot(self.xax, self.yax, clear = True) #Invalidade chart
+		#Prevents list from growing too large
 		if self.count1 > 5000:
 			self.count1 = 0
 			self.xax = []
 			self.yax = []
-
-	 	#print self.monit.monitored.measures[0].channels[0].descricao
-		#print self.monit.monitored.measures[1].channels[1].descricao
-		#print self.monit.monitored.measures[2].channels[0].descricao
-		#print self.monit.monitored.measures[3].channels[0].descricao
-		#print self.monit.monitored.measures[4].channels[0].descricao
 
 		
 if __name__ ==  "__main__":
