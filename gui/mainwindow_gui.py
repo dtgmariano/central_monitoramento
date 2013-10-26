@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Fri Oct 25 20:45:30 2013
-#      by: PyQt4 UI code generator 4.10.3
+# Created: Fri Oct 25 21:23:37 2013
+#      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,16 +12,7 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+    _fromUtf8 = lambda s: s
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -35,11 +26,16 @@ class Ui_MainWindow(object):
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
         self.tabGroup = QtGui.QWidget()
         self.tabGroup.setObjectName(_fromUtf8("tabGroup"))
-        self.verticalLayout_2 = QtGui.QVBoxLayout(self.tabGroup)
-        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.gridMonitores = QtGui.QGridLayout()
-        self.gridMonitores.setObjectName(_fromUtf8("gridMonitores"))
-        self.verticalLayout_2.addLayout(self.gridMonitores)
+        self.horizontalLayout = QtGui.QHBoxLayout(self.tabGroup)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        spacerItem = QtGui.QSpacerItem(362, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.widget = QtGui.QWidget(self.tabGroup)
+        self.widget.setMinimumSize(QtCore.QSize(0, 0))
+        self.widget.setObjectName(_fromUtf8("widget"))
+        self.horizontalLayout.addWidget(self.widget)
+        spacerItem1 = QtGui.QSpacerItem(362, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem1)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8("icones/group.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.tabGroup, icon, _fromUtf8(""))
@@ -78,11 +74,11 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabGroup), _translate("MainWindow", "Monitores", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabPacient), _translate("MainWindow", "Paciente", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabConfig), _translate("MainWindow", "Configurações", None))
-        self.menuConex_o.setTitle(_translate("MainWindow", "Conexão", None))
-        self.actionAbrir.setText(_translate("MainWindow", "Abrir", None))
-        self.actionFechar.setText(_translate("MainWindow", "Fechar", None))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabGroup), QtGui.QApplication.translate("MainWindow", "Monitores", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabPacient), QtGui.QApplication.translate("MainWindow", "Paciente", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabConfig), QtGui.QApplication.translate("MainWindow", "Configurações", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuConex_o.setTitle(QtGui.QApplication.translate("MainWindow", "Conexão", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAbrir.setText(QtGui.QApplication.translate("MainWindow", "Abrir", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionFechar.setText(QtGui.QApplication.translate("MainWindow", "Fechar", None, QtGui.QApplication.UnicodeUTF8))
 
