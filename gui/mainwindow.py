@@ -41,6 +41,9 @@ class MainWindow(QMainWindow):
 		orw = oru_wav_factory.create_oru(data)
 		objPatient = patient_factory.create_patient(orw.segments)
 		self.monitQueue.put(objPatient)
+		print objPatient.measures[3].channels[0].data
+		#Testing the function by presenting the heart frequency rate on a label
+		self.monitores[0].ui.lbFC.setText(str(objPatient.measures[3].channels[0].data)) #Updates label
 
 	#ack message sent when data is received
 	def ackMsg(self):
