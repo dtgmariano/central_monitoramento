@@ -1,7 +1,10 @@
+import sys
+sys.path.insert(0, '../API')
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from solo_monit_gui import Ui_SoloMonitForm
 from alarms import AlarmForm
+from gen_plotter import GenPlotter
 import math
 
 class MonitForm(QWidget):
@@ -13,17 +16,6 @@ class MonitForm(QWidget):
 		self.x = [v*0.01 for v in self.t]
 		self.y = [math.sin(2*math.pi*v) for v in self.x]
 		self.ui.ecgchart.plot(self.x, self.y)
-		self.pal = QPalette()
-		self.pal.setColor(QPalette.Background, Qt.black)
-		self.setPalette(self.pal)
-		self.pal.setColor(QPalette.Foreground, Qt.red)
-		self.ui.lblbpm.setPalette(self.pal)
-		self.pal.setColor(QPalette.Foreground, Qt.blue)
-		self.ui.lblspo.setPalette(self.pal)
-		self.pal.setColor(QPalette.Foreground, Qt.green)
-		self.ui.lblnibp.setPalette(self.pal)
-		self.pal.setColor(QPalette.Foreground, Qt.red)
-		self.ui.lbltemp.setPalette(self.pal)
 		self.alarmForm = AlarmForm()
 		self.alarmForm.setParent(self.ui.alarmePanel)
 		self.ui.alarmePanel.hide()
@@ -32,6 +24,8 @@ class MonitForm(QWidget):
 		self.ui.btnalarm.clicked.connect(self.toggleAlarms)
 		self.hidden = True
 		self.monitController = None
+		self.plotter = GenPlotter(self.ui.ecgchart,10000)
+		self.controller = None
 	
 	def toggleAlarms(self):
 		if self.hidden == True:
@@ -50,13 +44,6 @@ class MonitForm(QWidget):
 	def hideAlarms(self):
 		for w in range(0, self.ui.gridLayout_alarms.count()):
 			self.ui.gridLayout_alarms.itemAt(w).widget().hide()
-
-	def setFonte(self,monitController):
-		self.monitController = monitController
-
-	def atualizaGui(self):
-		if monitController:
-			self.monitController.atualizaIndividual(self)
 
 
 if __name__ == "__main__":

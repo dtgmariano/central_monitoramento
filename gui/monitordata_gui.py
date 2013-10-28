@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'monitordata.ui'
 #
-# Created: Fri Oct 25 21:09:48 2013
+# Created: Mon Oct 28 16:48:11 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -93,11 +93,11 @@ class Ui_Form(object):
         self.lbPaciente = QtGui.QLabel(self.gridLayoutWidget)
         self.lbPaciente.setMaximumSize(QtCore.QSize(120, 32))
         font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setItalic(False)
-        font.setWeight(75)
+        font.setUnderline(True)
         self.lbPaciente.setFont(font)
+        self.lbPaciente.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.lbPaciente.setStyleSheet(_fromUtf8("color: rgb(0, 0, 255);\n"
+"text-decoration: underline;"))
         self.lbPaciente.setObjectName(_fromUtf8("lbPaciente"))
         self.glMonitor.addWidget(self.lbPaciente, 1, 1, 1, 1)
         self.imgO2 = QtGui.QLabel(self.gridLayoutWidget)
@@ -161,15 +161,6 @@ class Ui_Form(object):
         self.lbMonitor.setFont(font)
         self.lbMonitor.setObjectName(_fromUtf8("lbMonitor"))
         self.glMonitor.addWidget(self.lbMonitor, 0, 1, 1, 1)
-        self.btDetalhes = QtGui.QPushButton(self.gridLayoutWidget)
-        self.btDetalhes.setMaximumSize(QtCore.QSize(32, 32))
-        self.btDetalhes.setText(_fromUtf8(""))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("icones/img_lupa1.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btDetalhes.setIcon(icon)
-        self.btDetalhes.setIconSize(QtCore.QSize(30, 30))
-        self.btDetalhes.setObjectName(_fromUtf8("btDetalhes"))
-        self.glMonitor.addWidget(self.btDetalhes, 1, 2, 1, 1)
         self.alertECGStatus = QtGui.QLabel(self.gridLayoutWidget)
         self.alertECGStatus.setMaximumSize(QtCore.QSize(32, 32))
         self.alertECGStatus.setText(_fromUtf8(""))
