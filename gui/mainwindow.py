@@ -56,12 +56,8 @@ class MainWindow(QMainWindow):
 		objPatient = patient_factory.create_patient(orw.segments)
 		if orw.filler[0] not in self.monitIds:
 			pos = len(self.monitIds)
-<<<<<<< HEAD
 			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0], self.configForm.alarmForm) 
-=======
-			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0])
 			self.monitores[pos].conecta(self, self.monitIds[orw.filler[0]])
->>>>>>> 8bbdc682e94e4c4fc617a6a17de4775bee4e8dec
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 		else:
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
