@@ -12,20 +12,25 @@ class MonitorController:
 		self.monitGui = monitGui
 		self.ident = ident
 		self.fila = Queue()
-		self.individual = None
-		self.filaLock = Lock()
+<<<<<<< HEAD
 		self.alarms = AlarmController(alarmForm)
 		self.alarmresp = None
 		self.monitGui.alertTemperatura.show()
-		
+
 	def atualizaGui(self):
-		self.filaLock.acquire()
-		if not self.fila.empty():
-			paciente = self.fila.get()
-			self.setLabel(self.monitGui.lbPaciente, paciente.name)
-			self.setLabel(self.monitGui.lbMonitor, self.ident)
-			self.atualizaLabels(self.monitGui, paciente)
-		self.filaLock.release()
+		paciente = self.fila.get()
+		self.setLabel(self.monitGui.lbPaciente, paciente.name)
+		self.setLabel(self.monitGui.lbMonitor, self.ident)
+		for m in paciente.measures:
+			if m.cod == 6:
+				continue
+			lb = getattr(self.monitGui,self.lbMap[m.cod][0])
+			un = self.lbMap[m.cod][1]
+			if m.cod == 3:
+				self.setLabel(lb, ("%s/%s" % (m.channels[0].data[0], m.channels[1].data[0])), un)
+			else:
+				self.setLabel(lb, str(m.channels[0].data[0]), un)
+		
 		self.alarmresp = self.alarms.check(paciente.measures)
 		print self.alarmresp
 
@@ -52,6 +57,19 @@ class MonitorController:
 		else:
 			self.monitGui.alertFC.hide()
 		'''
+		
+=======
+		self.individual = None
+		self.filaLock = Lock()
+
+	def atualizaGui(self):
+		self.filaLock.acquire()
+		if not self.fila.empty():
+			paciente = self.fila.get()
+			self.setLabel(self.monitGui.lbPaciente, paciente.name)
+			self.setLabel(self.monitGui.lbMonitor, self.ident)
+			self.atualizaLabels(self.monitGui, paciente)
+		self.filaLock.release()
 
 	def atualizaIndividual(self):
 		self.filaLock.acquire()
@@ -61,6 +79,7 @@ class MonitorController:
 			self.individual.plotter.atualiza(paciente.measures[4].channels[0].data)
 		self.filaLock.release()
 
+>>>>>>> 8bbdc682e94e4c4fc617a6a17de4775bee4e8dec
 	def setLabel(self, label, dado, unidade = ''):
 		label.setText("%s %s" % (dado, unidade))
 

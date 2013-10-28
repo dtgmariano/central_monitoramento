@@ -39,7 +39,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="lblbpm">
+         <widget class="QLabel" name="lbFC">
           <property name="minimumSize">
            <size>
             <width>150</width>
@@ -50,6 +50,9 @@
            <font>
             <pointsize>15</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(217, 41, 43);</string>
           </property>
           <property name="text">
            <string>fc: 120 bpm</string>
@@ -63,7 +66,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lblspo">
+         <widget class="QLabel" name="lbO2">
           <property name="minimumSize">
            <size>
             <width>150</width>
@@ -74,6 +77,9 @@
            <font>
             <pointsize>15</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(68, 21, 222);</string>
           </property>
           <property name="text">
            <string>spo2: 98%</string>
@@ -87,7 +93,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lblnibp">
+         <widget class="QLabel" name="lbPressao">
           <property name="minimumSize">
            <size>
             <width>150</width>
@@ -98,6 +104,9 @@
            <font>
             <pointsize>15</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(245, 232, 46);</string>
           </property>
           <property name="text">
            <string>nibp: 120/80</string>
@@ -111,7 +120,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lbltemp">
+         <widget class="QLabel" name="lbTemperatura">
           <property name="minimumSize">
            <size>
             <width>150</width>
@@ -122,6 +131,9 @@
            <font>
             <pointsize>15</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 170, 0);</string>
           </property>
           <property name="text">
            <string>temp: 36,5 ºC</string>

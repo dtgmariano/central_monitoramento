@@ -39,7 +39,10 @@ class MainWindow(QMainWindow):
 		self.monitIds = {}
 		self.wthread = UiWorkingThread(self.monitIds, self)
 		self.wthread.start()
-
+		QObject.connect(self.ui.tabWidget, SIGNAL('currentChanged(int)'), self.abaChanged)
+		self.controller = None
+		#self.individual = None
+		self.lock = Lock()
 		#Server api
 		self.reactor = qtreactor
 		#self.port = int(self.configForm.ui.edtPort.text()) #Port number
@@ -53,10 +56,20 @@ class MainWindow(QMainWindow):
 		objPatient = patient_factory.create_patient(orw.segments)
 		if orw.filler[0] not in self.monitIds:
 			pos = len(self.monitIds)
+<<<<<<< HEAD
 			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0], self.configForm.alarmForm) 
+=======
+			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0])
+			self.monitores[pos].conecta(self, self.monitIds[orw.filler[0]])
+>>>>>>> 8bbdc682e94e4c4fc617a6a17de4775bee4e8dec
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 		else:
-			self.monitIds[orw.filler[0]].addPaciente(objPatient)			
+			self.monitIds[orw.filler[0]].addPaciente(objPatient)
+		#if self.individual:
+		#		self.individual.atualizaIndividual()
+		#else:
+		#	for mid in self.monitIds:
+		#		self.monitIds[mid].atualizaGui()
 	
 	#ack message sent when data is received
 	def ackMsg(self):
@@ -76,6 +89,19 @@ class MainWindow(QMainWindow):
 			self.monitores.append(MyMonitor())
 			gridMonitores.addWidget(self.monitores[i], row, i%4)
 			gridMonitores.setColumnMinimumWidth(i%4,250)
+
+	def trocaControle(self, fonte):
+		self.controller = fonte.controller
+		self.controller.setIndividual(self.monitForm)
+		self.ui.tabWidget.setCurrentIndex(1)
+
+
+	def abaChanged(self):
+		if self.ui.tabWidget.currentIndex() == 1:
+			self.wthread.individual = self.controller
+		else:
+			self.wthread.individual = None
+
 		
 
 if __name__ == "__main__":

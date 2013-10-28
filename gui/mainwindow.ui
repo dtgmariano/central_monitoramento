@@ -98,14 +98,14 @@
      <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuConex_o">
+   <widget class="QMenu" name="menuConexao">
     <property name="title">
      <string>Conexão</string>
     </property>
     <addaction name="actionAbrir"/>
     <addaction name="actionFechar"/>
    </widget>
-   <addaction name="menuConex_o"/>
+   <addaction name="menuConexao"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAbrir">

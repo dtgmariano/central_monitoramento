@@ -11,6 +11,7 @@ from PyQt4.QtGui import *
 from monitorapi import ICUMonitor, ICUMonitorFactory
 from twisted.internet.task import LoopingCall
 from monitor_multi import monitor_multi
+from gen_plotter import GenPlotter
 
 ip = "localhost"
 port = 60000
@@ -23,6 +24,7 @@ class MonitSim(QWidget):
 		self.port = qtport
 		self.ui = Ui_MonitSimForm()
 		self.ui.setupUi(self)
+		self.plotter = GenPlotter(self.ui.ecgChart)
 		#This region sets the background black and changes the color or each parameter label
 		'''
 		self.pal = QPalette()
@@ -38,15 +40,9 @@ class MonitSim(QWidget):
 		self.ui.lbFC.setPalette(self.pal)
 		'''
 		self.smsg = None
-		self.x = []
-		self.y = []
 		self.monit = monitor_multi(sys.argv[1])
 		#Twisted client api
 		self.monitw = ICUMonitorFactory(self.setmsg, self.ip, self.port) #Create client
-		#ECG chart
-		self.count1 = 0
-		self.xax = []
-		self.yax = []
 
 	#Message that is sent to the icu center. HL7 format
 	def setmsg(self):		
@@ -75,19 +71,7 @@ class MonitSim(QWidget):
 		self.ui.lbO2.setText(strO2)
 		self.ui.lbFC.setText(strFc)
 		self.ui.lbPressao.setText(strSys + '/' + strDys)
-
-		#Plotting
-		#creates Xaxis and Yaxis
-		for val in self.monit.monitored.measures[4].channels[0].data:			
-			self.xax.append(self.count1)
-			self.yax.append(val)
-			self.count1+=1
-		self.ui.ecgChart.plot(self.xax, self.yax, clear = True) #Invalidade chart
-		#Prevents list from growing too large
-		if self.count1 > 5000:
-			self.count1 = 0
-			self.xax = []
-			self.yax = []
+		self.plotter.atualiza(self.monit.monitored.measures[4].channels[0].data)
 
 		
 if __name__ ==  "__main__":
