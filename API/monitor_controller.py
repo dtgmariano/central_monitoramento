@@ -15,23 +15,29 @@ class MonitorController:
 		self.filaLock = Lock()
 
 	def atualizaGui(self):
+		self.filaLock.acquire()
 		if not self.fila.empty():
 			paciente = self.fila.get()
 			self.setLabel(self.monitGui.lbPaciente, paciente.name)
 			self.setLabel(self.monitGui.lbMonitor, self.ident)
 			self.atualizaLabels(self.monitGui, paciente)
-				
+		self.filaLock.release()
+
 	def atualizaIndividual(self):
+		self.filaLock.acquire()
 		if not self.fila.empty():
 			paciente = self.fila.get()
 			self.atualizaLabels(self.individual.ui, paciente)
 			self.individual.plotter.atualiza(paciente.measures[4].channels[0].data)
+		self.filaLock.release()
 
 	def setLabel(self, label, dado, unidade = ''):
 		label.setText("%s %s" % (dado, unidade))
 
 	def addPaciente(self, paciente):
+		self.filaLock.acquire()
 		self.fila.put(paciente)
+		self.filaLock.release()
 
 	def setIndividual(self, individualGui):
 		self.individual = individualGui
