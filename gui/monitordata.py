@@ -7,9 +7,17 @@ class MyMonitor(QWidget):
 		super(MyMonitor, self).__init__(parent)
 		self.ui = Ui_Form()
 		self.ui.setupUi(self)
+		self.controller = None
 		alerts = [self.ui.alertPressao, self.ui.alertO2, self.ui.alertTemperatura, self.ui.alertFC, self.ui.alertECGStatus]
+		
 		for alert in alerts:
 			alert.hide()
+
+	def conecta(self, mainWindow, controller):
+		self.controller = controller
+		self.ui.lbPaciente.mousePressEvent = lambda event: self.ui.lbPaciente.emit(SIGNAL("clicked()"))
+		QObject.connect(self.ui.lbPaciente, SIGNAL('clicked()'), lambda fonte = self: mainWindow.trocaControle(fonte))
+
 
 
 if __name__ == "__main__":

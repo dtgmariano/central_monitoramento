@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Fri Oct 25 21:23:37 2013
+# Created: Mon Oct 28 20:25:48 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -54,8 +54,8 @@ class Ui_MainWindow(object):
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
-        self.menuConex_o = QtGui.QMenu(self.menubar)
-        self.menuConex_o.setObjectName(_fromUtf8("menuConex_o"))
+        self.menuConexao = QtGui.QMenu(self.menubar)
+        self.menuConexao.setObjectName(_fromUtf8("menuConexao"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -65,9 +65,9 @@ class Ui_MainWindow(object):
         self.actionFechar = QtGui.QAction(MainWindow)
         self.actionFechar.setEnabled(False)
         self.actionFechar.setObjectName(_fromUtf8("actionFechar"))
-        self.menuConex_o.addAction(self.actionAbrir)
-        self.menuConex_o.addAction(self.actionFechar)
-        self.menubar.addAction(self.menuConex_o.menuAction())
+        self.menuConexao.addAction(self.actionAbrir)
+        self.menuConexao.addAction(self.actionFechar)
+        self.menubar.addAction(self.menuConexao.menuAction())
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
@@ -78,7 +78,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabGroup), QtGui.QApplication.translate("MainWindow", "Monitores", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabPacient), QtGui.QApplication.translate("MainWindow", "Paciente", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabConfig), QtGui.QApplication.translate("MainWindow", "Configurações", None, QtGui.QApplication.UnicodeUTF8))
-        self.menuConex_o.setTitle(QtGui.QApplication.translate("MainWindow", "Conexão", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuConexao.setTitle(QtGui.QApplication.translate("MainWindow", "Conexão", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbrir.setText(QtGui.QApplication.translate("MainWindow", "Abrir", None, QtGui.QApplication.UnicodeUTF8))
         self.actionFechar.setText(QtGui.QApplication.translate("MainWindow", "Fechar", None, QtGui.QApplication.UnicodeUTF8))
 
