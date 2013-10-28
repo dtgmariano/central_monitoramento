@@ -9,6 +9,8 @@ from mainwindow_gui import Ui_MainWindow
 from config import ConfigForm
 from solo_monit import MonitForm
 from monitordata import MyMonitor
+from uiworking_thread import UiWorkingThread
+from monitor_controller import MonitorController
 
 #Queue for managing processes
 from Queue import Queue
@@ -18,6 +20,9 @@ from hl7parser import patient, measure, channel, oru_wav, oru_wav_factory, patie
 from icucenterapi import ICUCenter, ICUServerFactory
 #Twisted imports
 from twisted.internet.task import LoopingCall
+#Thread imports
+from threading import Lock
+
 
 class MainWindow(QMainWindow):
 	def __init__(self, qtreactor):
@@ -29,6 +34,10 @@ class MainWindow(QMainWindow):
 		self.monitores = []
 		self.setMonitores()
 		self.monitQueue = Queue()
+		self.monitList = []
+		self.monitIds = {}
+		self.wthread = UiWorkingThread(self.monitIds, self)
+		self.wthread.start()
 
 		#Server api
 		self.reactor = qtreactor
@@ -40,11 +49,13 @@ class MainWindow(QMainWindow):
 	def dataReceived(self, data):
 		orw = oru_wav_factory.create_oru(data)
 		objPatient = patient_factory.create_patient(orw.segments)
-		self.monitQueue.put(objPatient)
-		print objPatient.measures[3].channels[0].data
-		#Testing the function by presenting the heart frequency rate on a label
-		self.monitores[0].ui.lbFC.setText(str(objPatient.measures[3].channels[0].data)) #Updates label
-
+		if orw.filler[0] not in self.monitIds:
+			pos = len(self.monitIds)
+			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0])
+			self.monitIds[orw.filler[0]].addPaciente(objPatient)
+		else:
+			self.monitIds[orw.filler[0]].addPaciente(objPatient)			
+	
 	#ack message sent when data is received
 	def ackMsg(self):
 		return "ACK"
