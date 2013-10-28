@@ -31,8 +31,13 @@ class MainWindow(QMainWindow):
 		self.ui.setupUi(self)
 		self.setTab(ConfigForm, self.ui.tabConfig, "configForm")
 		self.setTab(MonitForm, self.ui.tabPacient, "monitForm")
+		
+		#self.setTab(Menubar, self.ui.menubar, "menubar")
+		#QObject.connect(self.ui.actionAbrir, SIGNAL("triggered()"), self.abrirConexao)
+		#self.ui.statusbar.showMessage("Teste")
+		
 		self.monitores = []
-		self.setMonitores()
+		self.setMonitores(8)
 		self.monitQueue = Queue()
 		self.monitList = []
 		self.monitIds = {}
@@ -44,7 +49,10 @@ class MainWindow(QMainWindow):
 		self.port = 60000 #Port number
 		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
 		self.server.start(self.reactor) #Starts server, listening on the specified port number
-
+	
+	def abrirConexao(self):
+		self.ui.statusbar.showMessage("Teste")
+			
 	#function that receives incoming data from twisted api
 	def dataReceived(self, data):
 		orw = oru_wav_factory.create_oru(data)
@@ -60,6 +68,7 @@ class MainWindow(QMainWindow):
 	def ackMsg(self):
 		return "ACK"
 	
+	
 	def setTab(self,tabClass,tab,name = None):
 		verticalLayout = QVBoxLayout(tab)
 		tab_inst = tabClass()
@@ -67,9 +76,10 @@ class MainWindow(QMainWindow):
 		if isinstance(name,str):
 			setattr(self,name, tab_inst)
 
-	def setMonitores(self):
+	#instancia os objetos da classe "MyMonitor" no form de Monitores "monitForms"
+	def setMonitores(self, maxMonitores):
 		gridMonitores = QGridLayout(self.ui.widget)
-		for i in range(0,8):
+		for i in range(0,maxMonitores):
 			row = 0 if i/4 == 0 else 1
 			self.monitores.append(MyMonitor())
 			gridMonitores.addWidget(self.monitores[i], row, i%4)
