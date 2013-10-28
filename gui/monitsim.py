@@ -40,7 +40,7 @@ class MonitSim(QWidget):
 		self.smsg = None
 		self.x = []
 		self.y = []
-		self.monit = monitor_multi(ip)
+		self.monit = monitor_multi(sys.argv[1])
 		#Twisted client api
 		self.monitw = ICUMonitorFactory(self.setmsg, self.ip, self.port) #Create client
 		#ECG chart
@@ -54,13 +54,13 @@ class MonitSim(QWidget):
 	
 	#Initiates the monitor
 	def turnOn(self):
-		LoopingCall(self.genMeasure).start(0.1) #Starts function that generates measures
-		self.monitw.startsend(self.reactor, 0.1) #Starts function that sends data to the icu center
+		LoopingCall(self.genMeasure).start(0.5) #Starts function that generates measures
+		self.monitw.startsend(self.reactor, 0.5) #Starts function that sends data to the icu center
 
 	#Generates new measures from the patient
 	def genMeasure(self):
 		self.monit.preenche() 
-		orw = self.monit.get_orw((self.ip, 'CEN'))
+		orw = self.monit.get_orw((sys.argv[1], 'CEN'))
 		self.smsg = orw.to_str()
 
 		#Creates strings with the measures
