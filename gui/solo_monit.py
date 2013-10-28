@@ -31,6 +31,7 @@ class MonitForm(QWidget):
 		#self.hideAlarms()
 		self.ui.btnalarm.clicked.connect(self.toggleAlarms)
 		self.hidden = True
+		self.monitController = None
 	
 	def toggleAlarms(self):
 		if self.hidden == True:
@@ -49,6 +50,14 @@ class MonitForm(QWidget):
 	def hideAlarms(self):
 		for w in range(0, self.ui.gridLayout_alarms.count()):
 			self.ui.gridLayout_alarms.itemAt(w).widget().hide()
+
+	def setFonte(self,monitController):
+		self.monitController = monitController
+
+	def atualizaGui(self):
+		if monitController:
+			self.monitController.atualizaIndividual(self)
+
 
 if __name__ == "__main__":
 	import sys
