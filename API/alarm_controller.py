@@ -1,4 +1,4 @@
-	class AlarmController:
+class AlarmController:
 	def __init__(self, alarmForm):
 		self.alarmForm = alarmForm
 		self.minal = 0
