@@ -11,6 +11,7 @@ from solo_monit import MonitForm
 from monitordata import MyMonitor
 from uiworking_thread import UiWorkingThread
 from monitor_controller import MonitorController
+from alarm_controller import AlarmController
 
 #Queue for managing processes
 from Queue import Queue
@@ -41,7 +42,8 @@ class MainWindow(QMainWindow):
 
 		#Server api
 		self.reactor = qtreactor
-		self.port = 60000 #Port number
+		#self.port = int(self.configForm.ui.edtPort.text()) #Port number
+		self.port = 60000
 		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
 		self.server.start(self.reactor) #Starts server, listening on the specified port number
 
@@ -51,7 +53,7 @@ class MainWindow(QMainWindow):
 		objPatient = patient_factory.create_patient(orw.segments)
 		if orw.filler[0] not in self.monitIds:
 			pos = len(self.monitIds)
-			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0])
+			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0], self.configForm.alarmForm) 
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 		else:
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)			
