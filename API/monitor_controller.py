@@ -16,7 +16,7 @@ class MonitorController(Controller):
 		self.alarmresp = []
 		self.pac = None
 		self.alarmresp = None
-		self.alertMap = {0:self.gui.alertPressao, 1:self.gui.alertO2, 2:self.gui.alertTemperatura, 3:self.gui.alertFC}
+		self.alertMap = {0:self.gui.lbPressao, 1:self.gui.lbO2, 2:self.gui.lbTemperatura, 3:self.gui.lbFC}
 		
 	def atualizaGui(self):
 		self.filaLock.acquire()
@@ -33,9 +33,9 @@ class MonitorController(Controller):
 		alarmcheck = self.alarms.check(paciente.measures)
 		for idx,val in enumerate(alarmcheck):
 			if val:
-				self.alertMap[idx].show()
+				self.alertMap[idx].setStyleSheet("color:red")#.show()
 			else:
-				self.alertMap[idx].hide()
+				self.alertMap[idx].setStyleSheet("")#.hide()
 		
 		if any(alarmcheck): 
 			self.gui.panel.setStyleSheet('QWidget#panel{background-color: rgb(255, 184, 137);border-radius: 5px; border: 1px solid rgb(255, 141, 1);}') 
