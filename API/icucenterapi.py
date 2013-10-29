@@ -23,4 +23,6 @@ class ICUServerFactory(protocol.Factory):
 	def start(self, gui_reactor):
 		gui_reactor.listenTCP(self.port, self)
 
-
+	def stop(self, gui_reactor):
+		gui_reactor.stop()
+		#gui_reactor.close()
