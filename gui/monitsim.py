@@ -1,5 +1,4 @@
 import sys
-sys.settrace()
 sys.path.insert(0, '../API')
 sys.path.insert(0, '../geradores')
 sys.path.insert(0, '../hl7parser')
@@ -51,8 +50,8 @@ class MonitSim(QWidget):
 	
 	#Initiates the monitor
 	def turnOn(self):
-		LoopingCall(self.genMeasure).start(0.5) #Starts function that generates measures
-		self.monitw.startsend(self.reactor, 0.5) #Starts function that sends data to the icu center
+		LoopingCall(self.genMeasure).start(0.1) #Starts function that generates measures
+		self.monitw.startsend(self.reactor, 0.1) #Starts function that sends data to the icu center
 
 	#Generates new measures from the patient
 	def genMeasure(self):
