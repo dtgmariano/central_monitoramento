@@ -4,11 +4,13 @@ sys.path.insert(0, '../hl7parser')
 from gerador_simples import gerador_simples, gerador_duplo
 from gerador_arquivo import gerador_arquivo
 from hl7parser import patient, measure, channel, oru_wav
+from random import choice
 class monitor_multi:
+	nomes = ['Joe Jonas', 'Franck Jonas', 'Rick Jonas', 'Jebi Jonas']
 	def __init__(self,ip):
 		self.id = ip
 		self.geradores = self.create_gen()
-		self.monitored = patient(1,'Jonas Brothers')
+		self.monitored = patient(1,choice(self.nomes))
 		self.add_measures()
 	def add_measures(self):
 		for k in self.geradores.keys():
@@ -27,7 +29,7 @@ class monitor_multi:
 		temperatura = gerador_duplo(gerador_simples(38,3), gerador_simples(35,4))
 		temperatura.gs1.info(1, 'C', (0,100), 'Temperature CH1', 1, 60)
 		temperatura.gs2.info(2, 'C', (0,100), 'Temperature CH2', 1, 60)
-		spo2 = gerador_simples(95,3)
+		spo2 = gerador_simples(92,3)
 		spo2.info(1, '%O2', (0, 100), 'Oximetry', 1, 60)
 		ecg = gerador_arquivo('../resources/.ecg_80',1000,500,int)
 		ecg.info(1, 'mv', (-1024,1024), 'D2', 1, 1000)

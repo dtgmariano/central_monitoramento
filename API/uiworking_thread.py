@@ -1,6 +1,4 @@
 from PyQt4.QtCore import *
-
-
 import time
 
 class UiWorkingThread(QThread):
@@ -13,8 +11,5 @@ class UiWorkingThread(QThread):
 			time.sleep(0.3)
 			if self.individual:
 				self.emit(SIGNAL('setIndividual'))
-				#self.controller.atualizaGui()
 			else:
 				self.emit(SIGNAL('setGroup'))
-				#for mid in self.monitIds:
-					#self.monitIds[mid].atualizaGui()
