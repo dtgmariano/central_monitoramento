@@ -88,7 +88,7 @@
        </font>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Normal&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -109,7 +109,7 @@
        </font>
       </property>
       <property name="text">
-       <string>000/00 mmmHG</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -178,7 +178,7 @@
        </font>
       </property>
       <property name="text">
-       <string>00 %</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -203,7 +203,7 @@
 text-decoration: underline;</string>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;John Doo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -240,7 +240,7 @@ text-decoration: underline;</string>
        </font>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;00 BPM&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string/>
       </property>
       <property name="textFormat">
        <enum>Qt::RichText</enum>
@@ -264,7 +264,7 @@ text-decoration: underline;</string>
        </font>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;00 &lt;span style=&quot; vertical-align:super;&quot;&gt;o&lt;/span&gt;C&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -349,7 +349,7 @@ text-decoration: underline;</string>
        </font>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;01&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>Desconectado</string>
       </property>
      </widget>
     </item>

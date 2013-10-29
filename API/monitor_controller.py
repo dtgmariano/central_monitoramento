@@ -7,9 +7,8 @@ from Queue import Queue
 from threading import Lock
 from controller import Controller
 
-class MonitorController:
-	lbMap = {1:("lbTemperatura","C"), 3:("lbPressao","mmHg"), 4:("lbO2","%"), 5:("lbFC","bpm")}
-
+class MonitorController(Controller):
+	
 	def __init__(self, gui, ident, alarmForm):
 		super(MonitorController,self).__init__(gui)
 		self.ident = ident
