@@ -11,6 +11,11 @@ class AlarmForm(QWidget):
 		verticalLayout = QVBoxLayout(parent)
 		alarmForm = AlarmForm()
 		verticalLayout.addWidget(alarmForm)
+	def connectAlarm(self, mainwindow):
+		QObject.connect(self.ui.edtMinFc_3, SIGNAL('texEdited(QString)'), lambda field = 'fcalarm', almvalue = [int(self.ui.edtMinFc_3.text()), int(self.ui.edtMaxFc_3.text())]: mainwindow.alarmChanged(field, almvalue))
+		self.ui.edtMinFc_3.setText('20')
+		print self.ui.edtMinFc_3.text()
+		print self
 
 if __name__ == "__main__":
 	import sys
