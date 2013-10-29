@@ -35,6 +35,9 @@ class MainWindow(QMainWindow):
 		self.setMonitores()
 		self.monitIds = {}
 		self.iController = IndividualController(self.monitForm)
+		self.iController.gui.alarmForm.connectAlarm(self)
+		print self.iController.gui.alarmForm
+		print self.monitForm.alarmForm
 		self.wthread = UiWorkingThread(self)
 		self.wthread.start()
 		QObject.connect(self.ui.tabWidget, SIGNAL('currentChanged(int)'), self.abaChanged)
@@ -50,6 +53,10 @@ class MainWindow(QMainWindow):
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinOxi_3.text(), self.configForm.alarmForm.ui.edtMaxOxi_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinTemp_3.text(), self.configForm.alarmForm.ui.edtMaxTemp_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinFc_3.text(), self.configForm.alarmForm.ui.edtMaxFc_3.text()])
+
+	def alarmChanged(self, field, value):
+		#setattr(self.iController.alarms, field, value)
+		print "Evento: "
 
 	def atualizaIndividual(self):
 		self.iController.atualizaGui()
@@ -98,6 +105,7 @@ class MainWindow(QMainWindow):
 		#self.controller = fonte.controller
 		#self.controller.setIndividual(self.monitForm)
 		self.iController.ident = fonte.controller.ident
+		#self.iController.gui.alarmForm.connectAlarm(self)
 		self.ui.tabWidget.setCurrentIndex(1)
 
 

@@ -14,6 +14,7 @@ class MonitForm(QWidget):
 		self.ui = Ui_SoloMonitForm()
 		self.ui.setupUi(self)
 		self.alarmForm = AlarmForm()
+		print self.alarmForm
 		self.alarmForm.setParent(self.ui.alarmePanel)
 		self.ui.alarmePanel.hide()
 		self.ui.parametrosPanel.setStyleSheet("background-color:black;");
