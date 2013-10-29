@@ -41,7 +41,8 @@ class MainWindow(QMainWindow):
 		self.connect(self.wthread, SIGNAL('setIndividual'), self.atualizaIndividual, Qt.QueuedConnection)
 		self.connect(self.wthread, SIGNAL('setGroup'), self.atualizaGrupo, Qt.QueuedConnection)
 		self.reactor = qtreactor
-		self.port = 60000 #Port number
+		#self.port = int(self.configForm.ui.edtPort.text()) #Port number
+		self.port = 60000
 		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
 		self.server.start(self.reactor) #Starts server, listening on the specified port number
 
@@ -56,7 +57,7 @@ class MainWindow(QMainWindow):
 		objPatient = patient_factory.create_patient(orw.segments)
 		if orw.filler[0] not in self.monitIds:
 			pos = len(self.monitIds)
-			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0])
+			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0], self.configForm.alarmForm) 
 			self.monitores[pos].conecta(self, self.monitIds[orw.filler[0]])
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 		else:
