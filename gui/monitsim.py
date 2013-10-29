@@ -1,4 +1,5 @@
 import sys
+sys.settrace()
 sys.path.insert(0, '../API')
 sys.path.insert(0, '../geradores')
 sys.path.insert(0, '../hl7parser')
