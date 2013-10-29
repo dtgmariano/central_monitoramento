@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
 		self.server.start(self.reactor) #Starts server, listening on the specified port number
 		self.alarmslist = []
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinPres_3.text(), self.configForm.alarmForm.ui.edtMaxPres_3.text()])
-		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinOxi_3.text(), self.configForm.alarmForm.ui.edtMaxOxi_3])
+		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinOxi_3.text(), self.configForm.alarmForm.ui.edtMaxOxi_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinTemp_3.text(), self.configForm.alarmForm.ui.edtMaxTemp_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinFc_3.text(), self.configForm.alarmForm.ui.edtMaxFc_3.text()])
 
@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
 			row = 0 if i/4 == 0 else 1
 			self.monitores.append(MyMonitor())
 			gridMonitores.addWidget(self.monitores[i], row, i%4)
-			gridMonitores.setColumnMinimumWidth(i%4,250)
+			gridMonitores.setColumnMinimumWidth(i%4,300)
 
 	def trocaControle(self, fonte):
 		#self.controller = fonte.controller

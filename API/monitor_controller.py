@@ -7,7 +7,7 @@ from Queue import Queue
 from threading import Lock
 from controller import Controller
 
-class MonitorController:
+class MonitorController(Controller):
 	
 	def __init__(self, gui, ident, alarmslist):
 		super(MonitorController,self).__init__(gui)
@@ -28,13 +28,16 @@ class MonitorController:
 			self.atualizaAlarmes(paciente)
 		self.filaLock.release()
 		self.alarmresp = self.alarms.check(paciente.measures)
-		print self.alarmresp
-
 		
 	def atualizaAlarmes(self, paciente):
 		alarmcheck = self.alarms.check(paciente.measures)
 		for idx,val in enumerate(alarmcheck):
 			if val:
-				alertMap[idx].show()
+				self.alertMap[idx].show()
 			else:
-				alertMap[idx].hide()	
+				self.alertMap[idx].hide()
+		
+		if any(alarmcheck): 
+			self.gui.panel.setStyleSheet('QWidget#panel{background-color: rgb(255, 184, 137);border-radius: 5px; border: 1px solid rgb(255, 141, 1);}') 
+		else:
+			self.gui.panel.setStyleSheet("QWidget#panel{border-radius: 5px; border: 1px solid black;}")

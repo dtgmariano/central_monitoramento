@@ -1,17 +1,16 @@
 class AlarmController:
 	def __init__(self, alarmlist):
-		self.alarmForm = alarmForm
 		self.minv = 0
 		self.maxv = 1
 		self.alarmresp = []
 		self.setAlarms(alarmlist[0], alarmlist[1], alarmlist[2], alarmlist[3])
 		
 	def setAlarms(self, sysdys, o2, temp, fc):
-		self.sysalarm = [int(sysdys[minv].split('/')[0]), int(sysdys[maxv].split('/')[0])]
-		self.dysalarm = [int(sysdys[minv].split('/')[1]), int(sysdys[maxv].split('/')[1])]
-		self.fcalarm = [int(fc[minv]), int(fc[maxv])]
-		self.o2alarm = [int(o2[minv]), int(o2[maxv])]
-		self.tempalarm = [int(temp[minv]), int(temp[maxv])]
+		self.sysalarm = [int(sysdys[self.minv].split('/')[0]), int(sysdys[self.maxv].split('/')[0])]
+		self.dysalarm = [int(sysdys[self.minv].split('/')[1]), int(sysdys[self.maxv].split('/')[1])]
+		self.fcalarm = [int(fc[self.minv]), int(fc[self.maxv])]
+		self.o2alarm = [int(o2[self.minv]), int(o2[self.maxv])]
+		self.tempalarm = [int(temp[self.minv]), int(temp[self.maxv])]
 
 	def check(self, measures):
 		self.alarmresp = []
