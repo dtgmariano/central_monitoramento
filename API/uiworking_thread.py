@@ -1,4 +1,4 @@
-from PyQt4.QtCore import QThread
+from PyQt4.QtCore import *
 import time
 
 class UiWorkingThread(QThread):
@@ -6,6 +6,7 @@ class UiWorkingThread(QThread):
 		super(UiWorkingThread, self).__init__(parent)
 		self.monitIds = monitIds
 		self.individual = False
+		self.signal = SIGNAL('signal')
 	
 	def run(self):
 		while True:
@@ -15,3 +16,4 @@ class UiWorkingThread(QThread):
 			else:
 				for mid in self.monitIds:
 					self.monitIds[mid].atualizaGui()
+					self.emit(self.signal, self.monitIds[mid].atualizaAlarmes())

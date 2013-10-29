@@ -38,6 +38,7 @@ class MainWindow(QMainWindow):
 		self.monitList = []
 		self.monitIds = {}
 		self.wthread = UiWorkingThread(self.monitIds, self)
+		self.connect(self.wthread, self.wthread.signal, self.updateAlarms)
 		self.wthread.start()
 		QObject.connect(self.ui.tabWidget, SIGNAL('currentChanged(int)'), self.abaChanged)
 		self.controller = None
@@ -49,6 +50,13 @@ class MainWindow(QMainWindow):
 		self.port = 60000
 		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
 		self.server.start(self.reactor) #Starts server, listening on the specified port number
+
+	def updateAlarms(self, alarms):
+		for al in alarms:
+			if al[1] == True:
+				al[0].show()
+			else:
+				al[0].hide()
 
 	#function that receives incoming data from twisted api
 	def dataReceived(self, data):

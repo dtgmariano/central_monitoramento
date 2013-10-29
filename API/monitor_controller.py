@@ -5,6 +5,8 @@ sys.path.insert(0, '../hl7parser')
 from hl7parser import patient, measure, channel
 from Queue import Queue
 from threading import Lock
+from PyQt4.QtCore import *
+
 class MonitorController:
 	lbMap = {1:("lbTemperatura","C"), 3:("lbPressao","mmHg"), 4:("lbO2","%"), 5:("lbFC","bpm")}
 
@@ -15,44 +17,20 @@ class MonitorController:
 		self.individual = None
 		self.filaLock = Lock()
 		self.alarms = AlarmController(alarmForm)
-		self.alarmresp = None
-		self.monitGui.alertTemperatura.show()
+		self.alarmresp = []
+		self.pac = None
 		
 	def atualizaGui(self):
 		self.filaLock.acquire()
 		if not self.fila.empty():
 			paciente = self.fila.get()
+			self.pac = paciente
 			self.setLabel(self.monitGui.lbPaciente, paciente.name)
 			self.setLabel(self.monitGui.lbMonitor, self.ident)
-			self.atualizaLabels(self.monitGui, paciente)
-		self.filaLock.release()
-		self.alarmresp = self.alarms.check(paciente.measures)
-		print self.alarmresp
+			self.atualizaLabels(self.monitGui, paciente)	
+		self.filaLock.release()	
 
-		'''	
-		if self.alarmresp[0] == True:
-			self.monitGui.alertPressao.show()
-		else:
-			self.monitGui.alertPressao.hide()
-		
-		if self.alarmresp[1] == True:
-			self.monitGui.alertO2.show()
-		else:
-			self.monitGui.alertO2.hide()
-		'''
 	
-		if self.alarmresp[2] == True:
-			self.monitGui.alertTemperatura.setText("OK")
-		else:
-			self.monitGui.alertTemperatura.setText("NOT")
-		
-		'''
-		if self.alarmresp[3] == True:
-			self.monitGui.alertFC.show()
-		else:
-			self.monitGui.alertFC.hide()
-		'''
-
 	def atualizaIndividual(self):
 		self.filaLock.acquire()
 		if not self.fila.empty():
@@ -82,5 +60,13 @@ class MonitorController:
 				self.setLabel(lb, ("%s/%s" % (m.channels[0].data[0], m.channels[1].data[0])), un)
 			else:
 				self.setLabel(lb, str(m.channels[0].data[0]), un)
-		
+
+	def atualizaAlarmes(self):
+		self.alarmresp = []
+		alarmcheck = self.alarms.check(self.pac.measures)
+		self.alarmresp.append([self.monitGui.alertPressao, alarmcheck[0]])
+		self.alarmresp.append([self.monitGui.alertO2, alarmcheck[1]])
+		self.alarmresp.append([self.monitGui.alertTemperatura, alarmcheck[2]])
+		self.alarmresp.append([self.monitGui.alertFC, alarmcheck[3]])
+		return self.alarmresp
 
