@@ -1,11 +1,15 @@
 from gerador import gerador
 import numpy as np
+from random import choice
 class gerador_simples(gerador):
 	def __init__(self, mean, sd):
 		self.mean = mean
 		self.sd = sd
+		self.base = np.random.random_integers(self.mean - self.sd, self.mean + self.sd, 1)[0]
+		self.list = [self.base for i in range(0,10)] + [self.base+(sd/2), self.base-(sd/2)]
 	def getNext(self,n = 1):
-		return np.random.random_integers(self.mean - self.sd, self.mean + self.sd, n)
+		return [choice(self.list) for i in range(0,n)]
+		#return np.random.random_integers(self.mean - self.sd, self.mean + self.sd, n)
 
 class gerador_duplo:
 	def __init__(self, gs1, gs2):
