@@ -68,8 +68,8 @@ class MainWindow(QMainWindow):
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 		else:
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
-		if orw.filler[0] == self.iController.ident:
-			self.iController.addPaciente(patient_factory.create_patient(oru_wav_factory.create_oru(data).segments))
+			if orw.filler[0] == self.iController.ident:
+				self.iController.addPaciente(patient_factory.create_patient(oru_wav_factory.create_oru(data).segments))
 	
 	#ack message sent when data is received
 	def ackMsg(self):
@@ -94,6 +94,8 @@ class MainWindow(QMainWindow):
 		#self.controller = fonte.controller
 		#self.controller.setIndividual(self.monitForm)
 		self.iController.ident = fonte.controller.ident
+		self.iController.clearPacientes()
+		self.iController.alarms = fonte.controller.alarms
 		self.ui.tabWidget.setCurrentIndex(1)
 
 

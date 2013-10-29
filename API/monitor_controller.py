@@ -6,6 +6,7 @@ from hl7parser import patient, measure, channel
 from Queue import Queue
 from threading import Lock
 from controller import Controller
+from PyQt4.QtGui import QPixmap
 
 class MonitorController(Controller):
 	
@@ -13,10 +14,8 @@ class MonitorController(Controller):
 		super(MonitorController,self).__init__(gui)
 		self.ident = ident
 		self.alarms = AlarmController(alarmslist)
-		self.alarmresp = []
-		self.pac = None
-		self.alarmresp = None
-		self.alertMap = {0:self.gui.lbPressao, 1:self.gui.lbO2, 2:self.gui.lbTemperatura, 3:self.gui.lbFC}
+		self.setAlertMap(gui)
+		
 		
 	def atualizaGui(self):
 		self.filaLock.acquire()
@@ -27,16 +26,17 @@ class MonitorController(Controller):
 			self.atualizaLabels(self.gui, paciente)
 			self.atualizaAlarmes(paciente)
 		self.filaLock.release()
-		self.alarmresp = self.alarms.check(paciente.measures)
 		
-	def atualizaAlarmes(self, paciente):
+	def atualizaAlarmes(self, paciente, base = ''):
 		alarmcheck = self.alarms.check(paciente.measures)
+		extensao = 'png'
 		for idx,val in enumerate(alarmcheck):
 			if val:
-				self.alertMap[idx].setStyleSheet("color:red")#.show()
+				self.alertMap[idx][0].setPixmap(QPixmap("icones/%s%s.%s" % (self.alertMap[idx][2], '_red', extensao)))
+				self.alertMap[idx][1].setStyleSheet("color:red")#.show()
 			else:
-				self.alertMap[idx].setStyleSheet("")#.hide()
-		
+				self.alertMap[idx][0].setPixmap(QPixmap("icones/%s%s.%s" % (self.alertMap[idx][2], base, extensao)))
+				self.alertMap[idx][1].setStyleSheet("")#.hide()
 		if any(alarmcheck): 
 			self.gui.panel.setStyleSheet('QWidget#panel{background-color: rgb(255, 184, 137);border-radius: 5px; border: 1px solid rgb(255, 141, 1);}') 
 		else:
