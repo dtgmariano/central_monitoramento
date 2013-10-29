@@ -1,25 +1,17 @@
 class AlarmController:
-	def __init__(self, alarmForm):
+	def __init__(self, alarmlist):
 		self.alarmForm = alarmForm
-		self.minal = 0
-		self.maxal = 1
+		self.minv = 0
+		self.maxv = 1
 		self.alarmresp = []
-
-		self.sysalarm = [int(self.alarmForm.ui.edtMinPres_3.text().split('/')[0]), int(self.alarmForm.ui.edtMaxPres_3.text().split('/')[0])]
+		self.setAlarms(alarmlist[0], alarmlist[1], alarmlist[2], alarmlist[3])
 		
-		self.dysalarm = [int(self.alarmForm.ui.edtMinPres_3.text().split('/')[1]), int(self.alarmForm.ui.edtMaxPres_3.text().split('/')[1])]	
-		self.fcalarm = [int(self.alarmForm.ui.edtMinFc_3.text()), int(self.alarmForm.ui.edtMaxFc_3.text())]
-
-		self.o2alarm = [int(self.alarmForm.ui.edtMinOxi_3.text()), int(self.alarmForm.ui.edtMaxOxi_3.text())]
-
-		self.tempalarm = [int(self.alarmForm.ui.edtMinTemp_3.text()), int(self.alarmForm.ui.edtMaxTemp_3.text())]
-
-	def setAlarms(self, syst, dyst, fc, spo, temp):
-		self.sysalarm = syst
-		self.dystalarm = dyst
-		self.fcalarm = fc
-		self.o2alarm = spo
-		self.tempalarm = temp
+	def setAlarms(self, sysdys, o2, temp, fc):
+		self.sysalarm = [int(sysdys[minv].split('/')[0]), int(sysdys[maxv].split('/')[0])]
+		self.dysalarm = [int(sysdys[minv].split('/')[1]), int(sysdys[maxv].split('/')[1])]
+		self.fcalarm = [int(fc[minv]), int(fc[maxv])]
+		self.o2alarm = [int(o2[minv]), int(o2[maxv])]
+		self.tempalarm = [int(temp[minv]), int(temp[maxv])]
 
 	def check(self, measures):
 		self.alarmresp = []
@@ -30,25 +22,25 @@ class AlarmController:
 		return self.alarmresp
 
 	def checkFc(self, fc):
-		if fc < self.fcalarm[self.minal] or fc > self.fcalarm[self.maxal]:
+		if fc < self.fcalarm[self.minv] or fc > self.fcalarm[self.maxv]:
 			return True
 		else:
 			return False
 
 	def checkSpo(self, spo):
-		if spo < self.o2alarm[self.minal] or spo > self.o2alarm[self.maxal]:
+		if spo < self.o2alarm[self.minv] or spo > self.o2alarm[self.maxv]:
 			return True
 		else:
 			return False
 
 	def checkTemp(self, temp):
-		if temp < self.tempalarm[self.minal] or temp > self.tempalarm[self.maxal]:
+		if temp < self.tempalarm[self.minv] or temp > self.tempalarm[self.maxv]:
 			return True
 		else:
 			return False
 
 	def checkPres(self, sys, dys):
-		if (sys < self.sysalarm[self.minal] and dys < self.dysalarm[self.minal]) or (sys > self.sysalarm[self.maxal] and dys > self.dysalarm[self.maxal]):
+		if (sys < self.sysalarm[self.minv] and dys < self.dysalarm[self.minv]) or (sys > self.sysalarm[self.maxv] and dys > self.dysalarm[self.maxv]):
 			return True
 		else:
 			return False

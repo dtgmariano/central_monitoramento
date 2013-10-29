@@ -8,14 +8,11 @@ from gen_plotter import GenPlotter
 import math
 
 class MonitForm(QWidget):
+	lbMap = {1:("lbTemperatura","C"), 3:("lbPressao","mmHg"), 4:("lbO2","%"), 5:("lbFC","bpm")}
 	def __init__(self, parent = None):
 		super(MonitForm, self).__init__(parent)
 		self.ui = Ui_SoloMonitForm()
 		self.ui.setupUi(self)
-		self.t = range(0,100)
-		self.x = [v*0.01 for v in self.t]
-		self.y = [math.sin(2*math.pi*v) for v in self.x]
-		self.ui.ecgchart.plot(self.x, self.y)
 		self.alarmForm = AlarmForm()
 		self.alarmForm.setParent(self.ui.alarmePanel)
 		self.ui.alarmePanel.hide()
@@ -44,6 +41,24 @@ class MonitForm(QWidget):
 	def hideAlarms(self):
 		for w in range(0, self.ui.gridLayout_alarms.count()):
 			self.ui.gridLayout_alarms.itemAt(w).widget().hide()
+
+	def atualiza(self, paciente):
+		self.atualizaLabels(self.ui, paciente)
+		self.plotter.atualiza(paciente.measures[4].channels[0].data)
+
+	def atualizaLabels(self, gui, paciente):
+		for m in paciente.measures:
+			if m.cod == 6:
+				continue
+			lb = getattr(gui,self.lbMap[m.cod][0])
+			un = self.lbMap[m.cod][1]
+			if m.cod == 3:
+				self.setLabel(lb, ("%s/%s" % (m.channels[0].data[0], m.channels[1].data[0])), un)
+			else:
+				self.setLabel(lb, str(m.channels[0].data[0]), un)
+
+	def setLabel(self, label, dado, unidade = ''):
+		label.setText("%s %s" % (dado, unidade))
 
 
 if __name__ == "__main__":
