@@ -36,8 +36,6 @@ class MainWindow(QMainWindow):
 		self.monitIds = {}
 		self.iController = IndividualController(self.monitForm)
 		self.iController.gui.alarmForm.connectAlarm(self)
-		print self.iController.gui.alarmForm
-		print self.monitForm.alarmForm
 		self.wthread = UiWorkingThread(self)
 		self.wthread.start()
 		QObject.connect(self.ui.tabWidget, SIGNAL('currentChanged(int)'), self.abaChanged)
@@ -75,16 +73,12 @@ class MainWindow(QMainWindow):
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 		else:
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
-		if orw.filler[0] == self.iController.ident:
-			self.iController.addPaciente(patient_factory.create_patient(oru_wav_factory.create_oru(data).segments))
+			if orw.filler[0] == self.iController.ident:
+				self.iController.addPaciente(patient_factory.create_patient(oru_wav_factory.create_oru(data).segments))
 	
 	#ack message sent when data is received
 	def ackMsg(self):
 		return "ACK"
-	
-	def plota(self):
-		if self.wthread.individual:
-			self.monitForm.ui.ecgchart.plot(self.monitForm.plotter.xax, self.monitForm.plotter.yax, clear=True)
 
 	def setTab(self,tabClass,tab,name = None):
 		verticalLayout = QVBoxLayout(tab)
@@ -106,6 +100,8 @@ class MainWindow(QMainWindow):
 		#self.controller.setIndividual(self.monitForm)
 		self.iController.ident = fonte.controller.ident
 		#self.iController.gui.alarmForm.connectAlarm(self)
+		self.iController.clearPacientes()
+		self.iController.alarms = fonte.controller.alarms
 		self.ui.tabWidget.setCurrentIndex(1)
 
 
