@@ -19,7 +19,6 @@ class MyMonitor(QWidget):
 		QObject.connect(self.ui.lbPaciente, SIGNAL('clicked()'), lambda fonte = self: mainWindow.trocaControle(fonte))
 
 
-
 if __name__ == "__main__":
 	import sys
 	app = QApplication(sys.argv)

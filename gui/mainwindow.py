@@ -11,6 +11,7 @@ from solo_monit import MonitForm
 from monitordata import MyMonitor
 from uiworking_thread import UiWorkingThread
 from monitor_controller import MonitorController
+from individual_controller import IndividualController
 
 #Queue for managing processes
 from Queue import Queue
@@ -20,7 +21,6 @@ from hl7parser import patient, measure, channel, oru_wav, oru_wav_factory, patie
 from icucenterapi import ICUCenter, ICUServerFactory
 #Twisted imports
 from twisted.internet.task import LoopingCall
-#Thread imports
 from threading import Lock
 
 
@@ -31,53 +31,45 @@ class MainWindow(QMainWindow):
 		self.ui.setupUi(self)
 		self.setTab(ConfigForm, self.ui.tabConfig, "configForm")
 		self.setTab(MonitForm, self.ui.tabPacient, "monitForm")
-		
-		#self.setTab(Menubar, self.ui.menubar, "menubar")
-		#QObject.connect(self.ui.actionAbrir, SIGNAL("triggered()"), self.abrirConexao)
-		#self.ui.statusbar.showMessage("Teste")
-		
 		self.monitores = []
-		self.setMonitores(8)
-		self.monitQueue = Queue()
-		self.monitList = []
+		self.setMonitores()
 		self.monitIds = {}
-		self.wthread = UiWorkingThread(self.monitIds, self)
+		self.iController = IndividualController(self.monitForm)
+		self.wthread = UiWorkingThread(self)
 		self.wthread.start()
 		QObject.connect(self.ui.tabWidget, SIGNAL('currentChanged(int)'), self.abaChanged)
-		self.controller = None
-		#self.individual = None
-		self.lock = Lock()
-		#Server api
+		self.connect(self.wthread, SIGNAL('setIndividual'), self.atualizaIndividual, Qt.QueuedConnection)
+		self.connect(self.wthread, SIGNAL('setGroup'), self.atualizaGrupo, Qt.QueuedConnection)
 		self.reactor = qtreactor
-		self.port = 60000 #Port number
+		#self.port = int(self.configForm.ui.edtPort.text()) #Port number
+		self.port = 60000
 		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
 		self.server.start(self.reactor) #Starts server, listening on the specified port number
-	
-	def abrirConexao(self):
-		self.ui.statusbar.showMessage("Teste")
-			
+
+	def atualizaIndividual(self):
+		self.iController.atualizaGui()
+	def atualizaGrupo(self):
+		for mid in self.monitIds:
+			self.monitIds[mid].atualizaGui()
+
 	#function that receives incoming data from twisted api
 	def dataReceived(self, data):
 		orw = oru_wav_factory.create_oru(data)
 		objPatient = patient_factory.create_patient(orw.segments)
 		if orw.filler[0] not in self.monitIds:
 			pos = len(self.monitIds)
-			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0])
+			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0], self.configForm.alarmForm) 
 			self.monitores[pos].conecta(self, self.monitIds[orw.filler[0]])
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 		else:
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
-		#if self.individual:
-		#		self.individual.atualizaIndividual()
-		#else:
-		#	for mid in self.monitIds:
-		#		self.monitIds[mid].atualizaGui()
+		if orw.filler[0] == self.iController.ident:
+			self.iController.addPaciente(patient_factory.create_patient(oru_wav_factory.create_oru(data).segments))
 	
 	#ack message sent when data is received
 	def ackMsg(self):
 		return "ACK"
-	
-	
+
 	def setTab(self,tabClass,tab,name = None):
 		verticalLayout = QVBoxLayout(tab)
 		tab_inst = tabClass()
@@ -95,16 +87,17 @@ class MainWindow(QMainWindow):
 			gridMonitores.setColumnMinimumWidth(i%4,250)
 
 	def trocaControle(self, fonte):
-		self.controller = fonte.controller
-		self.controller.setIndividual(self.monitForm)
+		#self.controller = fonte.controller
+		#self.controller.setIndividual(self.monitForm)
+		self.iController.ident = fonte.controller.ident
 		self.ui.tabWidget.setCurrentIndex(1)
 
 
 	def abaChanged(self):
 		if self.ui.tabWidget.currentIndex() == 1:
-			self.wthread.individual = self.controller
+			self.wthread.individual = True
 		else:
-			self.wthread.individual = None
+			self.wthread.individual = False
 
 		
 

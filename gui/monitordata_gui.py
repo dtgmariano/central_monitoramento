@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'monitordata.ui'
 #
-# Created: Mon Oct 28 16:48:11 2013
+# Created: Tue Oct 29 11:19:32 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -50,6 +50,7 @@ class Ui_Form(object):
         font.setItalic(False)
         font.setWeight(75)
         self.lbECGStatus.setFont(font)
+        self.lbECGStatus.setText(_fromUtf8(""))
         self.lbECGStatus.setObjectName(_fromUtf8("lbECGStatus"))
         self.glMonitor.addWidget(self.lbECGStatus, 6, 1, 1, 1)
         self.lbPressao = QtGui.QLabel(self.gridLayoutWidget)
@@ -60,6 +61,7 @@ class Ui_Form(object):
         font.setItalic(False)
         font.setWeight(75)
         self.lbPressao.setFont(font)
+        self.lbPressao.setText(_fromUtf8(""))
         self.lbPressao.setObjectName(_fromUtf8("lbPressao"))
         self.glMonitor.addWidget(self.lbPressao, 2, 1, 1, 1)
         self.imgPressao = QtGui.QLabel(self.gridLayoutWidget)
@@ -88,6 +90,7 @@ class Ui_Form(object):
         font.setItalic(False)
         font.setWeight(75)
         self.lbO2.setFont(font)
+        self.lbO2.setText(_fromUtf8(""))
         self.lbO2.setObjectName(_fromUtf8("lbO2"))
         self.glMonitor.addWidget(self.lbO2, 3, 1, 1, 1)
         self.lbPaciente = QtGui.QLabel(self.gridLayoutWidget)
@@ -98,6 +101,7 @@ class Ui_Form(object):
         self.lbPaciente.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.lbPaciente.setStyleSheet(_fromUtf8("color: rgb(0, 0, 255);\n"
 "text-decoration: underline;"))
+        self.lbPaciente.setText(_fromUtf8(""))
         self.lbPaciente.setObjectName(_fromUtf8("lbPaciente"))
         self.glMonitor.addWidget(self.lbPaciente, 1, 1, 1, 1)
         self.imgO2 = QtGui.QLabel(self.gridLayoutWidget)
@@ -114,6 +118,7 @@ class Ui_Form(object):
         font.setItalic(False)
         font.setWeight(75)
         self.lbFC.setFont(font)
+        self.lbFC.setText(_fromUtf8(""))
         self.lbFC.setTextFormat(QtCore.Qt.RichText)
         self.lbFC.setObjectName(_fromUtf8("lbFC"))
         self.glMonitor.addWidget(self.lbFC, 5, 1, 1, 1)
@@ -125,6 +130,7 @@ class Ui_Form(object):
         font.setItalic(False)
         font.setWeight(75)
         self.lbTemperatura.setFont(font)
+        self.lbTemperatura.setText(_fromUtf8(""))
         self.lbTemperatura.setObjectName(_fromUtf8("lbTemperatura"))
         self.glMonitor.addWidget(self.lbTemperatura, 4, 1, 1, 1)
         self.alertPressao = QtGui.QLabel(self.gridLayoutWidget)
@@ -173,11 +179,5 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.lbECGStatus.setText(QtGui.QApplication.translate("Form", "<html><head/><body><p>Normal</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.lbPressao.setText(QtGui.QApplication.translate("Form", "000/00 mmmHG", None, QtGui.QApplication.UnicodeUTF8))
-        self.lbO2.setText(QtGui.QApplication.translate("Form", "00 %", None, QtGui.QApplication.UnicodeUTF8))
-        self.lbPaciente.setText(QtGui.QApplication.translate("Form", "<html><head/><body><p>John Doo</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.lbFC.setText(QtGui.QApplication.translate("Form", "<html><head/><body><p>00 BPM</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.lbTemperatura.setText(QtGui.QApplication.translate("Form", "<html><head/><body><p>00 <span style=\" vertical-align:super;\">o</span>C</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.lbMonitor.setText(QtGui.QApplication.translate("Form", "<html><head/><body><p>01</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.lbMonitor.setText(QtGui.QApplication.translate("Form", "Desconectado", None, QtGui.QApplication.UnicodeUTF8))
 
