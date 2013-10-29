@@ -68,10 +68,6 @@ class MainWindow(QMainWindow):
 	#ack message sent when data is received
 	def ackMsg(self):
 		return "ACK"
-	
-	def plota(self):
-		if self.wthread.individual:
-			self.monitForm.ui.ecgchart.plot(self.monitForm.plotter.xax, self.monitForm.plotter.yax, clear=True)
 
 	def setTab(self,tabClass,tab,name = None):
 		verticalLayout = QVBoxLayout(tab)
