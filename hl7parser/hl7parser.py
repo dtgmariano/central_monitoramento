@@ -85,6 +85,7 @@ class obx(hl7_segment):
 	
 	def fill_chn_data(self, chn):
 		parts = self.data.split('^')
+		parts.remove('')
 		chn.bind_data(map(lambda x: int(x), parts))
 		
 	@staticmethod
@@ -126,10 +127,10 @@ class channel:
 	def data_str(self):
 		dt_str = ""
 		for datum in self.data:
-			if datum == self.data[-1]:
-				dt_str += ("%s" % datum)
-			else:
-				dt_str += ("%s^" % datum)
+			#if datum == self.data[-1]:
+				#dt_str += ("%s" % datum)
+			#else:
+			dt_str += ("%s^" % datum)
 		return dt_str
 		
 class patient:

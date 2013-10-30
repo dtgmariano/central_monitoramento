@@ -61,6 +61,8 @@ class MainWindow(QMainWindow):
 	def dataReceived(self, data):
 		orw = oru_wav_factory.create_oru(data)
 		objPatient = patient_factory.create_patient(orw.segments)
+		if any(map(lambda x: x > 2000,objPatient.measures[4].channels[0].data)):
+			print orw
 		if orw.filler[0] not in self.monitIds:
 			pos = len(self.monitIds)
 			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0], self.alarmslist) 

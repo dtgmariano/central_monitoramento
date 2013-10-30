@@ -6,8 +6,7 @@ from gerador_arquivo import gerador_arquivo
 from hl7parser import patient, measure, channel, oru_wav
 from random import choice
 class monitor_multi:
-	nomes = ['Joe Jonas', 'Kevin Jonas', 'Nick Jonas']
-	ecgs = [(40, '.ecg_40'), (80, '.ecg_80'), (120, '.ecg_120'), (180, '.ecg_180')]
+	nomes = ['Joe Jonas', 'Franck Jonas', 'Rick Jonas', 'Jebi Jonas']
 	def __init__(self,ip):
 		self.id = ip
 		self.geradores = self.create_gen()
@@ -32,10 +31,9 @@ class monitor_multi:
 		temperatura.gs2.info(2, 'C', (0,100), 'Temperature CH2', 1, 60)
 		spo2 = gerador_simples(92,3)
 		spo2.info(1, '%O2', (0, 100), 'Oximetry', 1, 60)
-		cor = choice(self.ecgs)
-		ecg = gerador_arquivo('../resources/'+cor[1],1000,500,int)
+		ecg = gerador_arquivo('../resources/.ecg_80',1000,500,int)
 		ecg.info(1, 'mv', (-1024,1024), 'D2', 1, 1000)
-		fc = gerador_simples(cor[0],5)
+		fc = gerador_simples(80,5)
 		fc.info(1, 'BPM', (0,300), 'Cardiac Rate', 1, 60)
 		return {3:pressao, 1:temperatura, 4:spo2, 6:ecg, 5:fc}
 	def preenche(self):
