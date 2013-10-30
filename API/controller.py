@@ -43,4 +43,3 @@ class Controller(object):
 				self.alertMap[idx][0].setPixmap(QPixmap("icones/%s%s.%s" % (self.alertMap[idx][2], '_red', extensao)))
 			else:
 				self.alertMap[idx][0].setPixmap(QPixmap("icones/%s%s.%s" % (self.alertMap[idx][2], base, extensao)))
-		self.gui.ui.imgFC.setPixmap(QPixmap("icones/fc_white.png"))

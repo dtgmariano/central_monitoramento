@@ -14,7 +14,7 @@ class gerador_arquivo(gerador):
 		self.npoint = 0
 		self.msecs = msecs
 		self.parser = parser
-
+		print 'instanciou'
 	def getNext(self):
 		q_pontos = (self.msecs*self.fs)/1000
 		values = []

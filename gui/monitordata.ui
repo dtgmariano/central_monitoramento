@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>241</width>
+    <width>283</width>
     <height>312</height>
    </rect>
   </property>
@@ -48,6 +48,27 @@ border: 1px solid black;}</string>
       </property>
       <item>
        <layout class="QGridLayout" name="glMonitor">
+        <item row="6" column="1">
+         <widget class="QLabel" name="lbECGStatus">
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="1">
          <widget class="QLabel" name="lbPaciente">
           <property name="maximumSize">
@@ -62,7 +83,7 @@ border: 1px solid black;}</string>
            </font>
           </property>
           <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
+           <cursorShape>ArrowCursor</cursorShape>
           </property>
           <property name="styleSheet">
            <string notr="true">color: rgb(0, 0, 255);
@@ -110,63 +131,6 @@ text-decoration: underline;</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="2">
-         <widget class="QLabel" name="alertTemperatura">
-          <property name="maximumSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>icones/img_alert.png</pixmap>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QLabel" name="alertPressao">
-          <property name="minimumSize">
-           <size>
-            <width>32</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>icones/img_alert.png</pixmap>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="imgPressao">
-          <property name="maximumSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>icones/img_pressao1.png</pixmap>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="1">
          <widget class="QLabel" name="lbPressao">
           <property name="maximumSize">
@@ -185,6 +149,22 @@ text-decoration: underline;</string>
           </property>
           <property name="text">
            <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="imgPressao">
+          <property name="maximumSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>icones/img_pressao1.png</pixmap>
           </property>
          </widget>
         </item>
@@ -209,22 +189,6 @@ text-decoration: underline;</string>
           </property>
           <property name="textFormat">
            <enum>Qt::RichText</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="QLabel" name="alertFC">
-          <property name="maximumSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>icones/img_alert.png</pixmap>
           </property>
          </widget>
         </item>
@@ -265,22 +229,6 @@ text-decoration: underline;</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="2">
-         <widget class="QLabel" name="alertECGStatus">
-          <property name="maximumSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>icones/img_alert.png</pixmap>
-          </property>
-         </widget>
-        </item>
         <item row="4" column="0">
          <widget class="QLabel" name="imgTemperatura">
           <property name="maximumSize">
@@ -313,22 +261,6 @@ text-decoration: underline;</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="imgO2">
-          <property name="maximumSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>icones/img_spo.png</pixmap>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="imgMonitor">
           <property name="maximumSize">
@@ -345,45 +277,8 @@ text-decoration: underline;</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>37</width>
-            <height>32</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="lbECGStatus">
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <italic>false</italic>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QLabel" name="alertO2">
+        <item row="3" column="0">
+         <widget class="QLabel" name="imgO2">
           <property name="maximumSize">
            <size>
             <width>32</width>
@@ -394,7 +289,7 @@ text-decoration: underline;</string>
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap>icones/img_alert.png</pixmap>
+           <pixmap>icones/img_spo.png</pixmap>
           </property>
          </widget>
         </item>
@@ -418,19 +313,6 @@ text-decoration: underline;</string>
            <string>Desconectado</string>
           </property>
          </widget>
-        </item>
-        <item row="2" column="3">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
        </layout>
       </item>

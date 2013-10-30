@@ -136,7 +136,7 @@ class Ui_SoloMonitForm(object):
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.imgFC = QtGui.QLabel(self.parametrosPanel)
         self.imgFC.setText(_fromUtf8(""))
-        self.imgFC.setPixmap(QtGui.QPixmap(_fromUtf8("icones/fc _white.png")))
+        self.imgFC.setPixmap(QtGui.QPixmap(_fromUtf8("icones/fc_white.png")))
         self.imgFC.setObjectName(_fromUtf8("imgFC"))
         self.horizontalLayout_2.addWidget(self.imgFC)
         self.lbFC = QtGui.QLabel(self.parametrosPanel)
