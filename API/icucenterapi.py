@@ -16,13 +16,15 @@ class ICUServerFactory(protocol.Factory):
 		self.port = gui_port
 		self.rcv_callback = gui_rcv_callback
 		self.ack_callback = gui_ack_callback
+		self.conn = None
 
 	def buildProtocol(self, addr):
 		return ICUCenter(self.port, self.rcv_callback, self.ack_callback)
 
 	def start(self, gui_reactor):
-		gui_reactor.listenTCP(self.port, self)
+		self.conn = gui_reactor.listenTCP(self.port, self)
 
 	def stop(self, gui_reactor):
-		gui_reactor.stop()
+		self.conn.stopListening()
+		#gui_reactor.stopListening()
 		#gui_reactor.close()

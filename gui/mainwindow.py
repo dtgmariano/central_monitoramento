@@ -42,13 +42,13 @@ class MainWindow(QMainWindow):
 		self.monitIds = {}
 		self.iController = IndividualController(self.monitForm)
 		self.iController.gui.alarmForm.connectAlarm(self)
-		self.wthread = UiWorkingThread(self)
+		#self.wthread = UiWorkingThread(self)
 		#self.wthread.start()
 		QObject.connect(self.ui.actionAbrir, SIGNAL("triggered()"), self.openConnection)
 		QObject.connect(self.ui.actionFechar, SIGNAL("triggered()"), self.closeConnection)
 		QObject.connect(self.ui.tabWidget, SIGNAL('currentChanged(int)'), self.abaChanged)
-		self.connect(self.wthread, SIGNAL('setIndividual'), self.atualizaIndividual, Qt.QueuedConnection)
-		self.connect(self.wthread, SIGNAL('setGroup'), self.atualizaGrupo, Qt.QueuedConnection)
+		#self.connect(self.wthread, SIGNAL('setIndividual'), self.atualizaIndividual, Qt.QueuedConnection)
+		#self.connect(self.wthread, SIGNAL('setGroup'), self.atualizaGrupo, Qt.QueuedConnection)
 		self.reactor = qtreactor
 		#self.port = int(self.configForm.ui.edtPort.text()) #Port number
 		#self.port = 60000
@@ -74,8 +74,14 @@ class MainWindow(QMainWindow):
 
 		self.maxNumMonitors = int(self.configForm.ui.edtMaxMon.text()) #Number of maximum monitors
 		self.port = int(self.configForm.ui.edtPort.text()) #Port number
+		
 		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
 		self.server.start(self.reactor) #Starts server, listening on the specified port number
+
+		self.wthread = UiWorkingThread(self)
+		
+		self.connect(self.wthread, SIGNAL('setIndividual'), self.atualizaIndividual, Qt.QueuedConnection)
+		self.connect(self.wthread, SIGNAL('setGroup'), self.atualizaGrupo, Qt.QueuedConnection)
 
 		self.wthread.start()
 
@@ -91,8 +97,16 @@ class MainWindow(QMainWindow):
 		self.configForm.setEnabled(1)
 		self.monitForm.setEnabled(0)
 
-		self.removeMonitors()
+		self.disconnect(self.wthread, SIGNAL('setIndividual'), self.atualizaIndividual)
+		self.disconnect(self.wthread, SIGNAL('setGroup'), self.atualizaGrupo)
 
+		self.wthread.stop()
+		self.removeMonitors()
+		self.server.stop(self.reactor)
+
+		self.monitores = []
+		self.monitIds = {}
+		
 		#Atualiza barra de status
 		self.ui.statusbar.showMessage("Connection OFF")
 
@@ -136,14 +150,9 @@ class MainWindow(QMainWindow):
 		if isinstance(name,str):
 			setattr(self,name, tab_inst)
 
-	def setMonitores(self):
-		self.gridMonitores = QGridLayout(self.ui.widget)
-		for i in range(0,9):
-			self.addMonitor()
-
 	def removeMonitors(self):
-		for i in range(0,8):
-			self.removeMonitor(self.monitores[i])
+		for monitor in self.monitores:
+			self.removeMonitor(monitor)
 
 	def addMonitor(self, monitor):
 		index = self.gridMonitores.count()
