@@ -35,8 +35,10 @@ class MainWindow(QMainWindow):
 		self.ui.setupUi(self)
 		self.setTab(ConfigForm, self.ui.tabConfig, "configForm")
 		self.setTab(MonitForm, self.ui.tabPacient, "monitForm")
+		self.gridMonitores = QGridLayout(self.ui.widget)
 		self.monitores = []
-		self.setMonitores()
+		self.maxNumMonitors = 8
+		#self.setMonitores()
 		self.monitIds = {}
 		self.iController = IndividualController(self.monitForm)
 		self.iController.gui.alarmForm.connectAlarm(self)
@@ -58,6 +60,7 @@ class MainWindow(QMainWindow):
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinTemp_3.text(), self.configForm.alarmForm.ui.edtMaxTemp_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinFc_3.text(), self.configForm.alarmForm.ui.edtMaxFc_3.text()])
 
+
 	def openConnection(self):
 		#Desabilita actionAbrir e habilita actionFechar
 		self.ui.actionAbrir.setEnabled(0)
@@ -66,6 +69,8 @@ class MainWindow(QMainWindow):
 		#Desabilita configForm e habilita monitForm
 		self.configForm.setEnabled(0)
 		self.monitForm.setEnabled(1)
+
+		#self.setMonitores()
 
 		#Atualiza barra de status
 		self.ui.statusbar.showMessage("Connection ON")
@@ -79,15 +84,17 @@ class MainWindow(QMainWindow):
 		self.configForm.setEnabled(1)
 		self.monitForm.setEnabled(0)
 
+		self.removeMonitors()
+
 		#Atualiza barra de status
 		self.ui.statusbar.showMessage("Connection OFF")
-
 
 	def alarmChanged(self, field, value):
 		setattr(self.iController.alarms, field, int(value))
 
 	def atualizaIndividual(self):
 		self.iController.atualizaGui()
+
 	def atualizaGrupo(self):
 		for mid in self.monitIds:
 			self.monitIds[mid].atualizaGui()
@@ -96,17 +103,20 @@ class MainWindow(QMainWindow):
 	def dataReceived(self, data):
 		orw = oru_wav_factory.create_oru(data)
 		objPatient = patient_factory.create_patient(orw.segments)
-		if any(map(lambda x: x > 2000,objPatient.measures[4].channels[0].data)):
-			print orw
-		if orw.filler[0] not in self.monitIds:
+		
+		if orw.filler[0] not in self.monitIds and self.gridMonitores.count() < self.maxNumMonitors:
 			pos = len(self.monitIds)
+			self.monitores.append(MyMonitor())
+			self.addMonitor(self.monitores[pos])
 			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0], self.alarmslist) 
 			self.monitores[pos].conecta(self, self.monitIds[orw.filler[0]])
-			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 		else:
-			self.monitIds[orw.filler[0]].addPaciente(objPatient)
+			message = "Has reached maximum number of monitors: " + str(self.maxNumMonitors)
+			self.ui.statusbar.showMessage(message)
 			if orw.filler[0] == self.iController.ident:
 				self.iController.addPaciente(patient_factory.create_patient(oru_wav_factory.create_oru(data).segments))
+		
+		self.monitIds[orw.filler[0]].addPaciente(objPatient)
 	
 	#ack message sent when data is received
 	def ackMsg(self):
@@ -120,12 +130,25 @@ class MainWindow(QMainWindow):
 			setattr(self,name, tab_inst)
 
 	def setMonitores(self):
-		gridMonitores = QGridLayout(self.ui.widget)
+		self.gridMonitores = QGridLayout(self.ui.widget)
+		for i in range(0,9):
+			self.addMonitor()
+
+	def removeMonitors(self):
 		for i in range(0,8):
-			row = 0 if i/4 == 0 else 1
-			self.monitores.append(MyMonitor())
-			gridMonitores.addWidget(self.monitores[i], row, i%4)
-			gridMonitores.setColumnMinimumWidth(i%4,300)
+			self.removeMonitor(self.monitores[i])
+
+	def addMonitor(self, monitor):
+		index = self.gridMonitores.count()
+		row = 0 if index/4 == 0 else 1
+		self.gridMonitores.addWidget(monitor, row, index%4)
+		self.gridMonitores.setColumnMinimumWidth(index%4,300)
+
+	def removeMonitor(self, monitor):
+		self.gridMonitores.removeWidget(monitor)
+		#message = "Monitor removed"
+		#self.ui.statusbar.showMessage(message)
+		monitor.deleteLater()
 
 	def trocaControle(self, fonte):
 		#self.controller = fonte.controller
@@ -135,15 +158,11 @@ class MainWindow(QMainWindow):
 		self.iController.alarms = fonte.controller.alarms
 		self.ui.tabWidget.setCurrentIndex(1)
 
-
 	def abaChanged(self):
 		if self.ui.tabWidget.currentIndex() == 1:
 			self.wthread.individual = True
 		else:
 			self.wthread.individual = False
-
-		
-
 
 if __name__ == "__main__":
         
