@@ -7,17 +7,21 @@ class AlarmForm(QWidget):
 		super(AlarmForm, self).__init__(parent)
 		self.ui = Ui_AlarmsForm()
 		self.ui.setupUi(self)
-		QObject.connect(self.ui.edtMaxFc_3, SIGNAL('textEdited(QString)'), self.showval)
 	def setParent(self,parent):
 		verticalLayout = QVBoxLayout(parent)
-		alarmForm = AlarmForm()
-		verticalLayout.addWidget(alarmForm)
-	def showval(self):
-		print self, self.ui.edtMinOxi_3.text()
+		verticalLayout.addWidget(self)
 	def connectAlarm(self, mainwindow):
-		QObject.connect(self.ui.edtMinFc_3, SIGNAL('texEdited(QString)'), lambda field = 'fcalarm', almvalue = [int(self.ui.edtMinFc_3.text()), int(self.ui.edtMaxFc_3.text())]: mainwindow.alarmChanged(field, almvalue))
-		self.ui.edtMinOxi_3.setText('200')
-		print self, self.ui.edtMinOxi_3.text()
+		QObject.connect(self.ui.edtMinFc_3, SIGNAL('textEdited(QString)'), lambda x,y='fcminalarm': mainwindow.alarmChanged(y,x))
+		QObject.connect(self.ui.edtMaxFc_3, SIGNAL('textEdited(QString)'), lambda x,y='fcmaxalarm': mainwindow.alarmChanged(y,x))
+		QObject.connect(self.ui.edtMinOxi_3, SIGNAL('textEdited(QString)'), lambda x,y='o2minalarm': mainwindow.alarmChanged(y,x))
+		QObject.connect(self.ui.edtMaxOxi_3, SIGNAL('textEdited(QString)'), lambda x,y='o2maxalarm': mainwindow.alarmChanged(y,x))
+		QObject.connect(self.ui.edtMinTemp_3, SIGNAL('textEdited(QString)'), lambda x,y='tempminalarm': mainwindow.alarmChanged(y,x))
+		QObject.connect(self.ui.edtMaxTemp_3, SIGNAL('textEdited(QString)'), lambda x,y='tempmaxalarm': mainwindow.alarmChanged(y,x))
+		QObject.connect(self.ui.edtMinPres_3, SIGNAL('textEdited(QString)'), lambda x,y='sysminalarm': mainwindow.alarmChanged(y,x.split('/')[0]))
+		QObject.connect(self.ui.edtMaxPres_3, SIGNAL('textEdited(QString)'), lambda x,y='sysmaxalarm': mainwindow.alarmChanged(y,x.split('/')[0]))
+		QObject.connect(self.ui.edtMinPres_3, SIGNAL('textEdited(QString)'), lambda x,y='dysminalarm': mainwindow.alarmChanged(y,x.split('/')[1]))
+		QObject.connect(self.ui.edtMaxPres_3, SIGNAL('textEdited(QString)'), lambda x,y='dysmaxalarm': mainwindow.alarmChanged(y,x.split('/')[1]))
+		
 
 if __name__ == "__main__":
 	import sys

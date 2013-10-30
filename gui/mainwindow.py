@@ -53,8 +53,7 @@ class MainWindow(QMainWindow):
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinFc_3.text(), self.configForm.alarmForm.ui.edtMaxFc_3.text()])
 
 	def alarmChanged(self, field, value):
-		#setattr(self.iController.alarms, field, value)
-		print "Evento: "
+		setattr(self.iController.alarms, field, int(value))
 
 	def atualizaIndividual(self):
 		self.iController.atualizaGui()
@@ -99,7 +98,6 @@ class MainWindow(QMainWindow):
 		#self.controller = fonte.controller
 		#self.controller.setIndividual(self.monitForm)
 		self.iController.ident = fonte.controller.ident
-		#self.iController.gui.alarmForm.connectAlarm(self)
 		self.iController.clearPacientes()
 		self.iController.alarms = fonte.controller.alarms
 		self.ui.tabWidget.setCurrentIndex(1)
