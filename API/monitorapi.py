@@ -24,4 +24,8 @@ class ICUMonitorFactory(protocol.ClientFactory):
 		gui_reactor.connectTCP(self.ip, self.port, self)
 
 	def startsend(self, gui_reactor, timerep):
-		LoopingCall(self.sendmsg, gui_reactor).start(timerep)
+		self.loop = LoopingCall(self.sendmsg, gui_reactor)
+		self.loop.start(timerep)
+
+	def stopsend(self):
+			self.loop.stop()
