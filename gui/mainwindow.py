@@ -37,13 +37,13 @@ class MainWindow(QMainWindow):
 		self.setTab(MonitForm, self.ui.tabPacient, "monitForm")
 		self.gridMonitores = QGridLayout(self.ui.widget)
 		self.monitores = []
-		self.maxNumMonitors = 8
+		#self.maxNumMonitors = 8
 		#self.setMonitores()
 		self.monitIds = {}
 		self.iController = IndividualController(self.monitForm)
 		self.iController.gui.alarmForm.connectAlarm(self)
 		self.wthread = UiWorkingThread(self)
-		self.wthread.start()
+		#self.wthread.start()
 		QObject.connect(self.ui.actionAbrir, SIGNAL("triggered()"), self.openConnection)
 		QObject.connect(self.ui.actionFechar, SIGNAL("triggered()"), self.closeConnection)
 		QObject.connect(self.ui.tabWidget, SIGNAL('currentChanged(int)'), self.abaChanged)
@@ -51,9 +51,9 @@ class MainWindow(QMainWindow):
 		self.connect(self.wthread, SIGNAL('setGroup'), self.atualizaGrupo, Qt.QueuedConnection)
 		self.reactor = qtreactor
 		#self.port = int(self.configForm.ui.edtPort.text()) #Port number
-		self.port = 60000
-		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
-		self.server.start(self.reactor) #Starts server, listening on the specified port number
+		#self.port = 60000
+		#self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
+		#self.server.start(self.reactor) #Starts server, listening on the specified port number
 		self.alarmslist = []
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinPres_3.text(), self.configForm.alarmForm.ui.edtMaxPres_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinOxi_3.text(), self.configForm.alarmForm.ui.edtMaxOxi_3.text()])
@@ -71,6 +71,13 @@ class MainWindow(QMainWindow):
 		self.monitForm.setEnabled(1)
 
 		#self.setMonitores()
+
+		self.maxNumMonitors = int(self.configForm.ui.edtMaxMon.text()) #Number of maximum monitors
+		self.port = int(self.configForm.ui.edtPort.text()) #Port number
+		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
+		self.server.start(self.reactor) #Starts server, listening on the specified port number
+
+		self.wthread.start()
 
 		#Atualiza barra de status
 		self.ui.statusbar.showMessage("Connection ON")
