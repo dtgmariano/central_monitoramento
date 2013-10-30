@@ -21,7 +21,7 @@ class MonitForm(QWidget):
 		self.ui.btnalarm.clicked.connect(self.toggleAlarms)
 		self.hidden = True
 		self.monitController = None
-		self.plotter = GenPlotter(self.ui.ecgchart,10000)
+		self.plotter = GenPlotter(self.ui.ecgchart,100000)
 		self.controller = None
 	
 	def toggleAlarms(self):

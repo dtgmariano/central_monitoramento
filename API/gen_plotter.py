@@ -4,13 +4,22 @@ class GenPlotter:
 		self.lim = lim
 		self.yax = []
 		self.xax = []
+		self.count = 1
 
 	def atualiza(self, data):
 		self.yax += data
 		ini = self.xax[-1] if self.xax else 0
 		self.xax += range(ini,ini+len(data))
 		self.chart.plot(self.xax, self.yax, clear = True)
+		self.ajustaEixo(ini, len(data), 1000)
 		self.reseta()
+
+	def ajustaEixo(self, ini, tam, span):
+		if self.count == 0:
+			self.chart.setXRange(ini, ini + tam + span)
+			self.count = 2
+		else:
+			self.count -= 1
 
 	def reseta(self):
 		if len(self.xax) > self.lim:
