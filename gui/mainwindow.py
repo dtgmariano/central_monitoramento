@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+
 #add folders to path for importing classes
 import sys
 sys.path.insert(0, '../API')
@@ -25,6 +28,7 @@ from threading import Lock
 
 
 class MainWindow(QMainWindow):
+
 	def __init__(self, qtreactor):
 		QMainWindow.__init__(self)
 		self.ui = Ui_MainWindow()
@@ -35,8 +39,11 @@ class MainWindow(QMainWindow):
 		self.setMonitores()
 		self.monitIds = {}
 		self.iController = IndividualController(self.monitForm)
+		self.iController.gui.alarmForm.connectAlarm(self)
 		self.wthread = UiWorkingThread(self)
 		self.wthread.start()
+		QObject.connect(self.ui.actionAbrir, SIGNAL("triggered()"), self.openConnection)
+		QObject.connect(self.ui.actionFechar, SIGNAL("triggered()"), self.closeConnection)
 		QObject.connect(self.ui.tabWidget, SIGNAL('currentChanged(int)'), self.abaChanged)
 		self.connect(self.wthread, SIGNAL('setIndividual'), self.atualizaIndividual, Qt.QueuedConnection)
 		self.connect(self.wthread, SIGNAL('setGroup'), self.atualizaGrupo, Qt.QueuedConnection)
@@ -50,6 +57,34 @@ class MainWindow(QMainWindow):
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinOxi_3.text(), self.configForm.alarmForm.ui.edtMaxOxi_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinTemp_3.text(), self.configForm.alarmForm.ui.edtMaxTemp_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinFc_3.text(), self.configForm.alarmForm.ui.edtMaxFc_3.text()])
+
+	def openConnection(self):
+		#Desabilita actionAbrir e habilita actionFechar
+		self.ui.actionAbrir.setEnabled(0)
+		self.ui.actionFechar.setEnabled(1)
+		
+		#Desabilita configForm e habilita monitForm
+		self.configForm.setEnabled(0)
+		self.monitForm.setEnabled(1)
+
+		#Atualiza barra de status
+		self.ui.statusbar.showMessage("Connection ON")
+
+	def closeConnection(self):
+		#Desabilita actionFechar e habilita actionAbrir
+		self.ui.actionAbrir.setEnabled(1)
+		self.ui.actionFechar.setEnabled(0)
+		
+		#Desabilita monitForm e habilita configForm
+		self.configForm.setEnabled(1)
+		self.monitForm.setEnabled(0)
+
+		#Atualiza barra de status
+		self.ui.statusbar.showMessage("Connection OFF")
+
+
+	def alarmChanged(self, field, value):
+		setattr(self.iController.alarms, field, int(value))
 
 	def atualizaIndividual(self):
 		self.iController.atualizaGui()
@@ -109,18 +144,19 @@ class MainWindow(QMainWindow):
 
 		
 
+
 if __name__ == "__main__":
-	
-	app = QApplication([])
+        
+        app = QApplication([])
 
-	try:
-		import qt4reactor
-	except: 
-		from twisted.internet import qt4reactor
+        try:
+                import qt4reactor
+        except: 
+                from twisted.internet import qt4reactor
 
-	qt4reactor.install()
+        qt4reactor.install()
 
-	from twisted.internet import reactor
-	frm = MainWindow(reactor)
-	frm.show()
-	reactor.run()
+        from twisted.internet import reactor
+        frm = MainWindow(reactor)
+        frm.show()
+        reactor.run()

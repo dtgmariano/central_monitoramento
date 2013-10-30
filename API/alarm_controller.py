@@ -6,11 +6,16 @@ class AlarmController:
 		self.setAlarms(alarmlist[0], alarmlist[1], alarmlist[2], alarmlist[3])
 		
 	def setAlarms(self, sysdys, o2, temp, fc):
-		self.sysalarm = [int(sysdys[self.minv].split('/')[0]), int(sysdys[self.maxv].split('/')[0])]
-		self.dysalarm = [int(sysdys[self.minv].split('/')[1]), int(sysdys[self.maxv].split('/')[1])]
-		self.fcalarm = [int(fc[self.minv]), int(fc[self.maxv])]
-		self.o2alarm = [int(o2[self.minv]), int(o2[self.maxv])]
-		self.tempalarm = [int(temp[self.minv]), int(temp[self.maxv])]
+		self.sysminalarm = int(sysdys[self.minv].split('/')[0])
+		self.sysmaxalarm =  int(sysdys[self.maxv].split('/')[0])
+		self.dysminalarm = int(sysdys[self.minv].split('/')[1])
+		self.dysmaxalarm =  int(sysdys[self.maxv].split('/')[1])
+		self.fcminalarm = int(fc[self.minv])
+		self.fcmaxalarm =  int(fc[self.maxv])
+		self.o2minalarm = int(o2[self.minv])
+		self.o2maxalarm =  int(o2[self.maxv])
+		self.tempminalarm = int(temp[self.minv])
+		self.tempmaxalarm =  int(temp[self.maxv])
 
 	def check(self, measures):
 		self.alarmresp = []
@@ -21,25 +26,25 @@ class AlarmController:
 		return self.alarmresp
 
 	def checkFc(self, fc):
-		if fc < self.fcalarm[self.minv] or fc > self.fcalarm[self.maxv]:
+		if fc < self.fcminalarm or fc > self.fcmaxalarm:
 			return True
 		else:
 			return False
 
 	def checkSpo(self, spo):
-		if spo < self.o2alarm[self.minv] or spo > self.o2alarm[self.maxv]:
+		if spo < self.o2minalarm or spo > self.o2maxalarm:
 			return True
 		else:
 			return False
 
 	def checkTemp(self, temp):
-		if temp < self.tempalarm[self.minv] or temp > self.tempalarm[self.maxv]:
+		if temp < self.tempminalarm or temp > self.tempmaxalarm:
 			return True
 		else:
 			return False
 
 	def checkPres(self, sys, dys):
-		if (sys < self.sysalarm[self.minv] and dys < self.dysalarm[self.minv]) or (sys > self.sysalarm[self.maxv] and dys > self.dysalarm[self.maxv]):
+		if (sys < self.sysminalarm and dys < self.dysminalarm) or (sys > self.sysmaxalarm and dys > self.dysmaxalarm):
 			return True
 		else:
 			return False
