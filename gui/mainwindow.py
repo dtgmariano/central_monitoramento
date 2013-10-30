@@ -58,6 +58,7 @@ class MainWindow(QMainWindow):
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinTemp_3.text(), self.configForm.alarmForm.ui.edtMaxTemp_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinFc_3.text(), self.configForm.alarmForm.ui.edtMaxFc_3.text()])
 
+
 	def openConnection(self):
 		#Desabilita actionAbrir e habilita actionFechar
 		self.ui.actionAbrir.setEnabled(0)
@@ -79,9 +80,12 @@ class MainWindow(QMainWindow):
 		self.configForm.setEnabled(1)
 		self.monitForm.setEnabled(0)
 
-		#Atualiza barra de status
-		self.ui.statusbar.showMessage("Connection OFF")
+		self.removeMonitors()
 
+		#Atualiza barra de status
+		#self.ui.statusbar.showMessage("Connection OFF")
+
+		
 
 	def alarmChanged(self, field, value):
 		setattr(self.iController.alarms, field, int(value))
@@ -118,12 +122,27 @@ class MainWindow(QMainWindow):
 			setattr(self,name, tab_inst)
 
 	def setMonitores(self):
-		gridMonitores = QGridLayout(self.ui.widget)
-		for i in range(0,8):
-			row = 0 if i/4 == 0 else 1
+		self.gridMonitores = QGridLayout(self.ui.widget)
+		for i in range(0,9):
+			self.addMonitor(8)
+
+	def addMonitor(self, maxNumMonitors):
+		index = int((self.gridMonitores.count()))
+		if index < maxNumMonitors:
+			row = 0 if index/4 == 0 else 1
 			self.monitores.append(MyMonitor())
-			gridMonitores.addWidget(self.monitores[i], row, i%4)
-			gridMonitores.setColumnMinimumWidth(i%4,300)
+			self.gridMonitores.addWidget(self.monitores[index], row, index%4)
+			self.gridMonitores.setColumnMinimumWidth(index%4,300)
+		else:
+			message = "MaxNumMonitors " + str(maxNumMonitors)
+			self.ui.statusbar.showMessage(message)
+
+	def removeMonitors(self):
+		for i in range(0,8):
+			self.gridMonitores.removeWidget(self.monitores[i])
+			message = "Teste"
+			self.ui.statusbar.showMessage(message)
+			self.monitores[i].deleteLater()
 
 	def trocaControle(self, fonte):
 		#self.controller = fonte.controller
@@ -133,15 +152,11 @@ class MainWindow(QMainWindow):
 		self.iController.alarms = fonte.controller.alarms
 		self.ui.tabWidget.setCurrentIndex(1)
 
-
 	def abaChanged(self):
 		if self.ui.tabWidget.currentIndex() == 1:
 			self.wthread.individual = True
 		else:
 			self.wthread.individual = False
-
-		
-
 
 if __name__ == "__main__":
         
