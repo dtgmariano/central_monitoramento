@@ -68,7 +68,7 @@ class MainWindow(QMainWindow):
 		self.monitForm.setEnabled(1)
 
 		#Atualiza barra de status
-		self.ui.statusbar.showMessage("Conexao aberta")
+		self.ui.statusbar.showMessage("Connection ON")
 
 	def closeConnection(self):
 		#Desabilita actionFechar e habilita actionAbrir
@@ -80,7 +80,7 @@ class MainWindow(QMainWindow):
 		self.monitForm.setEnabled(0)
 
 		#Atualiza barra de status
-		self.ui.statusbar.showMessage("Conexao fechada")
+		self.ui.statusbar.showMessage("Connection OFF")
 
 
 	def alarmChanged(self, field, value):
