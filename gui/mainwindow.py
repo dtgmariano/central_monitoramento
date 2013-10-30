@@ -123,7 +123,6 @@ class MainWindow(QMainWindow):
 	#function that receives incoming data from twisted api
 	def dataReceived(self, data):
 		orw = oru_wav_factory.create_oru(data)
-		print data
 		if orw.filler[0] in self.monitIds and (not any(map(lambda x: isinstance(x,obx),orw.segments))):
 			self.removeMonitor(orw.filler[0])
 			del self.monitIds[orw.filler[0]]
