@@ -82,12 +82,15 @@ class MonitSim(QWidget):
 		strFc = str(self.monit.monitored.measures[3].channels[0].data).strip('[]') #BPM
 		strSys = str(self.monit.monitored.measures[1].channels[0].data).strip('[]') #Systolic
 		strDys = str(self.monit.monitored.measures[1].channels[1].data).strip('[]') #Dyastolic
-
+		strName = str(self.monit.monitored.name)
+		strId = str(sys.argv[1])
 		#Updates the labels for showing the measures
 		self.ui.lbTemperatura.setText(strTemp) 
 		self.ui.lbO2.setText(strO2)
 		self.ui.lbFC.setText(strFc)
 		self.ui.lbPressao.setText(strSys + '/' + strDys)
+		self.ui.lbPaciente.setText(strName)
+		self.ui.lbMonitor.setText(strId)
 		self.plotter.atualiza(self.monit.monitored.measures[4].channels[0].data)
 
 		

@@ -6,7 +6,7 @@ from gerador_arquivo import gerador_arquivo
 from hl7parser import patient, measure, channel, oru_wav
 from random import choice
 class monitor_multi:
-	nomes = ['Joe Jonas', 'Kevin Jonas', 'Nick Jonas']
+	nomes = ['John', 'Peter', 'Stela', 'Marta', 'Richard', 'Adam']
 	ecgs = [(40, '.ecg_40'), (80, '.ecg_80'), (120, '.ecg_120'), (180, '.ecg_180')]
 	def __init__(self,ip):
 		self.id = ip
