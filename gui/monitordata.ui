@@ -310,7 +310,7 @@ text-decoration: underline;</string>
            </font>
           </property>
           <property name="text">
-           <string>Desconectado</string>
+           <string>Disconnected</string>
           </property>
          </widget>
         </item>

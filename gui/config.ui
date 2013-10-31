@@ -19,7 +19,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Configurações</string>
+        <string>Settings</string>
        </property>
       </widget>
      </item>
@@ -48,7 +48,7 @@
        <item row="0" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Porta de conexão</string>
+          <string>Connection port</string>
          </property>
         </widget>
        </item>
@@ -62,7 +62,7 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Máximo de monitores</string>
+          <string>Maximum of monitors</string>
          </property>
         </widget>
        </item>
@@ -95,7 +95,7 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Alarmes Gerais</string>
+        <string>General alarms</string>
        </property>
       </widget>
      </item>

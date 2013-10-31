@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'solo_monitor.ui'
 #
-# Created: Thu Oct 31 12:11:12 2013
+# Created: Thu Oct 31 12:06:35 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -182,6 +182,6 @@ class Ui_SoloMonitForm(object):
     def retranslateUi(self, SoloMonitForm):
         SoloMonitForm.setWindowTitle(_translate("SoloMonitForm", "Vital Signs Monitor", None))
         self.label.setText(_translate("SoloMonitForm", "ECG", None))
-        self.btnalarm.setText(_translate("SoloMonitForm", "Individual alarms", None))
+        self.btnalarm.setText(_translate("SoloMonitForm", "Alarmes Individuais", None))
 
 from pyqtgraph import PlotWidget

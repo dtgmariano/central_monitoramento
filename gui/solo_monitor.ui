@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Monitor de Sinais Vitais</string>
+   <string>Vital Signs Monitor</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
@@ -352,7 +352,7 @@
         <bool>true</bool>
        </property>
        <property name="text">
-        <string>Alarmes Individuais</string>
+        <string>Individual alarms</string>
        </property>
       </widget>
      </item>

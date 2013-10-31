@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Mon Oct 28 20:25:48 2013
-#      by: PyQt4 UI code generator 4.9.1
+# Created: Thu Oct 31 12:03:48 2013
+#      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,7 +12,16 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -74,11 +83,11 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabGroup), QtGui.QApplication.translate("MainWindow", "Monitores", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabPacient), QtGui.QApplication.translate("MainWindow", "Paciente", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabConfig), QtGui.QApplication.translate("MainWindow", "Configurações", None, QtGui.QApplication.UnicodeUTF8))
-        self.menuConexao.setTitle(QtGui.QApplication.translate("MainWindow", "Conexão", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionAbrir.setText(QtGui.QApplication.translate("MainWindow", "Abrir", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionFechar.setText(QtGui.QApplication.translate("MainWindow", "Fechar", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(_translate("MainWindow", "ICU Monitoring Center", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabGroup), _translate("MainWindow", "Monitors", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabPacient), _translate("MainWindow", "Patient", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabConfig), _translate("MainWindow", "Settings", None))
+        self.menuConexao.setTitle(_translate("MainWindow", "Connection", None))
+        self.actionAbrir.setText(_translate("MainWindow", "Open", None))
+        self.actionFechar.setText(_translate("MainWindow", "Close", None))
 

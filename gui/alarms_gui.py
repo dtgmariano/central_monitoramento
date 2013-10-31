@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'alarms.ui'
 #
-# Created: Fri Oct 25 20:52:00 2013
-#      by: PyQt4 UI code generator 4.9.1
+# Created: Thu Oct 31 11:57:25 2013
+#      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,12 +12,21 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_AlarmsForm(object):
     def setupUi(self, AlarmsForm):
         AlarmsForm.setObjectName(_fromUtf8("AlarmsForm"))
-        AlarmsForm.resize(563, 146)
+        AlarmsForm.resize(571, 146)
         self.verticalLayout = QtGui.QVBoxLayout(AlarmsForm)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.gridLayout_alarms = QtGui.QGridLayout()
@@ -116,25 +125,25 @@ class Ui_AlarmsForm(object):
         QtCore.QMetaObject.connectSlotsByName(AlarmsForm)
 
     def retranslateUi(self, AlarmsForm):
-        AlarmsForm.setWindowTitle(QtGui.QApplication.translate("AlarmsForm", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.edtMinTemp_3.setText(QtGui.QApplication.translate("AlarmsForm", "35", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_30.setText(QtGui.QApplication.translate("AlarmsForm", "SPO2", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_29.setText(QtGui.QApplication.translate("AlarmsForm", "Mínimo", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_36.setText(QtGui.QApplication.translate("AlarmsForm", "Mínimo", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_39.setText(QtGui.QApplication.translate("AlarmsForm", "Mínimo", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_32.setText(QtGui.QApplication.translate("AlarmsForm", "Máximo", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_38.setText(QtGui.QApplication.translate("AlarmsForm", "Frequência Cardíaca", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_31.setText(QtGui.QApplication.translate("AlarmsForm", "Mínimo", None, QtGui.QApplication.UnicodeUTF8))
-        self.edtMinPres_3.setText(QtGui.QApplication.translate("AlarmsForm", "90/70", None, QtGui.QApplication.UnicodeUTF8))
-        self.edtMinOxi_3.setText(QtGui.QApplication.translate("AlarmsForm", "90", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_40.setText(QtGui.QApplication.translate("AlarmsForm", "Máximo", None, QtGui.QApplication.UnicodeUTF8))
-        self.edtMaxFc_3.setText(QtGui.QApplication.translate("AlarmsForm", "95", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_37.setText(QtGui.QApplication.translate("AlarmsForm", "Máximo", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_33.setText(QtGui.QApplication.translate("AlarmsForm", "Temperatura", None, QtGui.QApplication.UnicodeUTF8))
-        self.edtMaxPres_3.setText(QtGui.QApplication.translate("AlarmsForm", "140/90", None, QtGui.QApplication.UnicodeUTF8))
-        self.edtMaxTemp_3.setText(QtGui.QApplication.translate("AlarmsForm", "38", None, QtGui.QApplication.UnicodeUTF8))
-        self.edtMinFc_3.setText(QtGui.QApplication.translate("AlarmsForm", "45", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_35.setText(QtGui.QApplication.translate("AlarmsForm", "Pressão", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_34.setText(QtGui.QApplication.translate("AlarmsForm", "Máximo", None, QtGui.QApplication.UnicodeUTF8))
-        self.edtMaxOxi_3.setText(QtGui.QApplication.translate("AlarmsForm", "100", None, QtGui.QApplication.UnicodeUTF8))
+        AlarmsForm.setWindowTitle(_translate("AlarmsForm", "Form", None))
+        self.edtMinTemp_3.setText(_translate("AlarmsForm", "35", None))
+        self.label_30.setText(_translate("AlarmsForm", "SPO2", None))
+        self.label_29.setText(_translate("AlarmsForm", "Minimum", None))
+        self.label_36.setText(_translate("AlarmsForm", "Minimum", None))
+        self.label_39.setText(_translate("AlarmsForm", "Minimum", None))
+        self.label_32.setText(_translate("AlarmsForm", "Maximum", None))
+        self.label_38.setText(_translate("AlarmsForm", "Cardiac Frequency", None))
+        self.label_31.setText(_translate("AlarmsForm", "Minimum", None))
+        self.edtMinPres_3.setText(_translate("AlarmsForm", "90/70", None))
+        self.edtMinOxi_3.setText(_translate("AlarmsForm", "90", None))
+        self.label_40.setText(_translate("AlarmsForm", "Maximum", None))
+        self.edtMaxFc_3.setText(_translate("AlarmsForm", "95", None))
+        self.label_37.setText(_translate("AlarmsForm", "Maximum", None))
+        self.label_33.setText(_translate("AlarmsForm", "Temperature", None))
+        self.edtMaxPres_3.setText(_translate("AlarmsForm", "140/90", None))
+        self.edtMaxTemp_3.setText(_translate("AlarmsForm", "38", None))
+        self.edtMinFc_3.setText(_translate("AlarmsForm", "45", None))
+        self.label_35.setText(_translate("AlarmsForm", "Pressure", None))
+        self.label_34.setText(_translate("AlarmsForm", "Maximum", None))
+        self.edtMaxOxi_3.setText(_translate("AlarmsForm", "100", None))
 

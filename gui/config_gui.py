@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'config.ui'
 #
-# Created: Wed Oct 30 16:54:39 2013
+# Created: Thu Oct 31 12:12:03 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -83,10 +83,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(_translate("Form", "Form", None))
-        self.label.setText(_translate("Form", "Configurações", None))
-        self.label_3.setText(_translate("Form", "Porta de conexão", None))
+        self.label.setText(_translate("Form", "Settings", None))
+        self.label_3.setText(_translate("Form", "Connection port", None))
         self.edtPort.setText(_translate("Form", "60000", None))
-        self.label_4.setText(_translate("Form", "Máximo de monitores", None))
+        self.label_4.setText(_translate("Form", "Maximum of monitors", None))
         self.edtMaxMon.setText(_translate("Form", "8", None))
-        self.label_2.setText(_translate("Form", "Alarmes Gerais", None))
+        self.label_2.setText(_translate("Form", "General alarms", None))
 

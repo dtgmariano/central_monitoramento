@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ICU Monitoring Center</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -26,7 +26,7 @@
          <normaloff>icones/group.png</normaloff>icones/group.png</iconset>
        </attribute>
        <attribute name="title">
-        <string>Monitores</string>
+        <string>Monitors</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
@@ -73,7 +73,7 @@
          <normaloff>icones/single.png</normaloff>icones/single.png</iconset>
        </attribute>
        <attribute name="title">
-        <string>Paciente</string>
+        <string>Patient</string>
        </attribute>
       </widget>
       <widget class="QWidget" name="tabConfig">
@@ -82,7 +82,7 @@
          <normaloff>icones/settings.png</normaloff>icones/settings.png</iconset>
        </attribute>
        <attribute name="title">
-        <string>Configurações</string>
+        <string>Settings</string>
        </attribute>
       </widget>
      </widget>
@@ -100,7 +100,7 @@
    </property>
    <widget class="QMenu" name="menuConexao">
     <property name="title">
-     <string>Conexão</string>
+     <string>Connection</string>
     </property>
     <addaction name="actionAbrir"/>
     <addaction name="actionFechar"/>
@@ -110,7 +110,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAbrir">
    <property name="text">
-    <string>Abrir</string>
+    <string>Open</string>
    </property>
   </action>
   <action name="actionFechar">
@@ -118,7 +118,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Fechar</string>
+    <string>Close</string>
    </property>
   </action>
  </widget>
