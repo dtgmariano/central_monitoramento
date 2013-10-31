@@ -14,16 +14,16 @@ class MonitorController(Controller):
 		super(MonitorController,self).__init__(gui)
 		self.ident = ident
 		self.alarms = AlarmController(alarmslist)
-		self.setAlertMap(gui)
+		self.setAlertMap(gui.ui)
 		
 		
 	def atualizaGui(self):
 		self.filaLock.acquire()
 		if not self.fila.empty():
 			paciente = self.fila.get()
-			self.setLabel(self.gui.lbPaciente, paciente.name)
-			self.setLabel(self.gui.lbMonitor, self.ident)
-			self.atualizaLabels(self.gui, paciente)
+			self.setLabel(self.gui.ui.lbPaciente, paciente.name)
+			self.setLabel(self.gui.ui.lbMonitor, self.ident)
+			self.atualizaLabels(self.gui.ui, paciente)
 			self.atualizaAlarmes(paciente)
 		self.filaLock.release()
 		
@@ -38,6 +38,6 @@ class MonitorController(Controller):
 				self.alertMap[idx][0].setPixmap(QPixmap("icones/%s%s.%s" % (self.alertMap[idx][2], base, extensao)))
 				self.alertMap[idx][1].setStyleSheet("")#.hide()
 		if any(alarmcheck): 
-			self.gui.panel.setStyleSheet('QWidget#panel{background-color: rgb(255, 184, 137);border-radius: 5px; border: 1px solid rgb(255, 141, 1);}') 
+			self.gui.ui.panel.setStyleSheet('QWidget#panel{background-color: rgb(255, 184, 137);border-radius: 5px; border: 1px solid rgb(255, 141, 1);}') 
 		else:
-			self.gui.panel.setStyleSheet("QWidget#panel{border-radius: 5px; border: 1px solid black;}")
+			self.gui.ui.panel.setStyleSheet("QWidget#panel{border-radius: 5px; border: 1px solid black;}")

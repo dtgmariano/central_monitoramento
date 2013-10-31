@@ -12,7 +12,7 @@ from monitorapi import ICUMonitor, ICUMonitorFactory
 from twisted.internet.task import LoopingCall
 from monitor_multi import monitor_multi
 from gen_plotter import GenPlotter
-
+import time
 ip = "localhost"
 port = 60000
 
@@ -44,14 +44,31 @@ class MonitSim(QWidget):
 		#Twisted client api
 		self.monitw = ICUMonitorFactory(self.setmsg, self.ip, self.port) #Create client
 
+
+	def closeEvent(self, event):
+		self.loop.stop()
+		self.monitw.stopsend()
+		time.sleep(1)
+		fecha = oru_wav((12312,'CEN'),(sys.argv[1], 'MON'))
+		p1 = patient(1,'Jonas Brothers')
+		m1 = measure()
+		p1.add_measure(m1)
+		fecha.add_patient(p1)
+		fecha.fill_segments()
+		self.smsg = fecha.to_str()
+		self.monitw.sendmsg(self.reactor)
+		#time.sleep(5)
+		#self.reactor.stop()
+
 	#Message that is sent to the icu center. HL7 format
-	def setmsg(self):		
+	def setmsg(self):
 		return self.smsg
 	
 	#Initiates the monitor
 	def turnOn(self):
-		LoopingCall(self.genMeasure).start(0.1) #Starts function that generates measures
-		self.monitw.startsend(self.reactor, 0.1) #Starts function that sends data to the icu center
+		self.loop = LoopingCall(self.genMeasure)
+		self.loop.start(0.3) #Starts function that generates measures
+		self.monitw.startsend(self.reactor, 0.3) #Starts function that sends data to the icu center
 
 	#Generates new measures from the patient
 	def genMeasure(self):

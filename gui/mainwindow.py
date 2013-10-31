@@ -19,7 +19,7 @@ from individual_controller import IndividualController
 #Queue for managing processes
 from Queue import Queue
 #HL7 Parser
-from hl7parser import patient, measure, channel, oru_wav, oru_wav_factory, patient_factory
+from hl7parser import patient, measure, channel, oru_wav, oru_wav_factory, patient_factory, obx
 #Twisted API for server
 from icucenterapi import ICUCenter, ICUServerFactory
 #Twisted imports
@@ -106,7 +106,7 @@ class MainWindow(QMainWindow):
 
 		self.monitores = []
 		self.monitIds = {}
-		
+
 		#Atualiza barra de status
 		self.ui.statusbar.showMessage("Connection OFF")
 
@@ -123,21 +123,25 @@ class MainWindow(QMainWindow):
 	#function that receives incoming data from twisted api
 	def dataReceived(self, data):
 		orw = oru_wav_factory.create_oru(data)
-		objPatient = patient_factory.create_patient(orw.segments)
-		
-		if orw.filler[0] not in self.monitIds and self.gridMonitores.count() < self.maxNumMonitors:
-			pos = len(self.monitIds)
-			self.monitores.append(MyMonitor())
-			self.addMonitor(self.monitores[pos])
-			self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos].ui, orw.filler[0], self.alarmslist) 
-			self.monitores[pos].conecta(self, self.monitIds[orw.filler[0]])
+		if orw.filler[0] in self.monitIds and (not any(map(lambda x: isinstance(x,obx),orw.segments))):
+			self.removeMonitor(orw.filler[0])
+			del self.monitIds[orw.filler[0]]
 		else:
-			message = "Has reached maximum number of monitors: " + str(self.maxNumMonitors)
-			self.ui.statusbar.showMessage(message)
-			if orw.filler[0] == self.iController.ident:
-				self.iController.addPaciente(patient_factory.create_patient(oru_wav_factory.create_oru(data).segments))
-		
-		self.monitIds[orw.filler[0]].addPaciente(objPatient)
+			objPatient = patient_factory.create_patient(orw.segments)
+			
+			if orw.filler[0] not in self.monitIds and self.gridMonitores.count() < self.maxNumMonitors:
+				pos = len(self.monitIds)
+				self.monitores.append(MyMonitor())
+				self.addMonitor(self.monitores[pos])
+				self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos], orw.filler[0], self.alarmslist) 
+				self.monitores[pos].conecta(self, self.monitIds[orw.filler[0]])
+			else:
+				message = "Has reached maximum number of monitors: " + str(self.maxNumMonitors)
+				self.ui.statusbar.showMessage(message)
+				if orw.filler[0] == self.iController.ident:
+					self.iController.addPaciente(patient_factory.create_patient(oru_wav_factory.create_oru(data).segments))
+			
+			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 	
 	#ack message sent when data is received
 	def ackMsg(self):
@@ -151,8 +155,8 @@ class MainWindow(QMainWindow):
 			setattr(self,name, tab_inst)
 
 	def removeMonitors(self):
-		for monitor in self.monitores:
-			self.removeMonitor(monitor)
+		for filler_id in self.monitIds:
+			self.removeMonitor(filler_id)
 
 	def addMonitor(self, monitor):
 		index = self.gridMonitores.count()
@@ -160,11 +164,15 @@ class MainWindow(QMainWindow):
 		self.gridMonitores.addWidget(monitor, row, index%4)
 		self.gridMonitores.setColumnMinimumWidth(index%4,300)
 
-	def removeMonitor(self, monitor):
-		self.gridMonitores.removeWidget(monitor)
+	def removeMonitor(self, filler_id):
+		controller = self.monitIds[filler_id]
+		self.monitores.remove(controller.gui)
+		self.gridMonitores.removeWidget(controller.gui)
+		controller.gui.deleteLater()
+		
 		#message = "Monitor removed"
 		#self.ui.statusbar.showMessage(message)
-		monitor.deleteLater()
+		
 
 	def trocaControle(self, fonte):
 		#self.controller = fonte.controller
