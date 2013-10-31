@@ -88,7 +88,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>icones/img_pressao1.png</pixmap>
+        <pixmap>icones/pressao.png</pixmap>
        </property>
       </widget>
      </item>
@@ -146,7 +146,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>icones/img_spo.png</pixmap>
+        <pixmap>icones/spo.png</pixmap>
        </property>
       </widget>
      </item>
@@ -207,7 +207,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>icones/img_temperatura2.png</pixmap>
+        <pixmap>icones/temp.png</pixmap>
        </property>
       </widget>
      </item>
@@ -223,7 +223,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>icones/img_fc.png</pixmap>
+        <pixmap>icones/fc.png</pixmap>
        </property>
       </widget>
      </item>

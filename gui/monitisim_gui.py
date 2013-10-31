@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'monitsim.ui'
 #
-# Created: Thu Oct 31 11:49:36 2013
+# Created: Thu Oct 31 11:39:55 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
