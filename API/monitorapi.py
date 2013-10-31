@@ -28,4 +28,4 @@ class ICUMonitorFactory(protocol.ClientFactory):
 		self.loop.start(timerep)
 
 	def stopsend(self):
-			self.loop.stop()
+		self.loop.stop()
