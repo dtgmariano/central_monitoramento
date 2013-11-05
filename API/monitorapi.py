@@ -20,6 +20,12 @@ class ICUMonitorFactory(protocol.ClientFactory):
 	def buildProtocol(self, addr):
 		return ICUMonitor(self.msg_callback)
 
+	def clientConnectionLost(self, connector, reason):
+		pass
+	
+	def clientConnectionFailed(self, connector, reason):
+		pass
+
 	def sendmsg(self, gui_reactor):
 		gui_reactor.connectTCP(self.ip, self.port, self)
 

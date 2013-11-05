@@ -10,7 +10,7 @@ class UiWorkingThread(QThread):
 	
 	def run(self):
 		while not self.hasStoped.isSet():
-			time.sleep(0.3)
+			time.sleep(0.05)
 			if self.individual:
 				self.emit(SIGNAL('setIndividual'))
 			else:

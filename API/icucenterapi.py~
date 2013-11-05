@@ -2,6 +2,8 @@ from twisted.internet import protocol
 
 class ICUCenter(protocol.Protocol):
 
+	MAX_LENGTH = 200000
+
 	def __init__(self, gui_port, gui_rcv_callback, gui_ack_callback):
 		self.port = gui_port
 		self.rcv_callback = gui_rcv_callback

@@ -13,7 +13,10 @@ from twisted.internet.task import LoopingCall
 from monitor_multi import monitor_multi
 from gen_plotter import GenPlotter
 import time
-ip = "localhost"
+
+#ip = "192.168.2.10"
+#ip = '10.5.1.194'
+ip = 'localhost'
 port = 60000
 
 class MonitSim(QWidget):
@@ -25,20 +28,6 @@ class MonitSim(QWidget):
 		self.ui = Ui_MonitSimForm()
 		self.ui.setupUi(self)
 		self.plotter = GenPlotter(self.ui.ecgChart)
-		#This region sets the background black and changes the color or each parameter label
-		'''
-		self.pal = QPalette()
-		self.pal.setColor(QPalette.Background, Qt.black)
-		self.setPalette(self.pal)
-		self.pal.setColor(QPalette.Foreground, Qt.blue)
-		self.ui.lbO2.setPalette(self.pal)
-		self.pal.setColor(QPalette.Foreground, Qt.red)
-		self.ui.lbTemperatura.setPalette(self.pal)
-		self.pal.setColor(QPalette.Foreground, Qt.yellow)
-		self.ui.lbPressao.setPalette(self.pal)
-		self.pal.setColor(QPalette.Foreground, Qt.green)
-		self.ui.lbFC.setPalette(self.pal)
-		'''
 		self.smsg = None
 		self.monit = monitor_multi(sys.argv[1])
 		#Twisted client api
