@@ -37,6 +37,7 @@ class MainWindow(QMainWindow):
 		self.setTab(MonitForm, self.ui.tabPacient, "monitForm")
 		self.gridMonitores = QGridLayout(self.ui.widget)
 		self.monitores = []
+		self.countTest = 0
 		#self.maxNumMonitors = 8
 		#self.setMonitores()
 		self.monitIds = {}
@@ -61,7 +62,8 @@ class MainWindow(QMainWindow):
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinFc_3.text(), self.configForm.alarmForm.ui.edtMaxFc_3.text()])
 		self.configForm.alarmForm.connectAlarm(self)
 
-
+		self.ui.statusbar.showMessage("Connection OFF")
+		
 	def openConnection(self):
 		#Desabilita actionAbrir e habilita actionFechar
 		self.ui.actionAbrir.setEnabled(0)
@@ -135,21 +137,29 @@ class MainWindow(QMainWindow):
 		if orw.filler[0] in self.monitIds and (not any(map(lambda x: isinstance(x,obx),orw.segments))):
 			self.removeMonitor(orw.filler[0])
 			del self.monitIds[orw.filler[0]]
+			#self.organizeMonitors()
 		else:
 			objPatient = patient_factory.create_patient(orw.segments)
 			
-			if orw.filler[0] not in self.monitIds and self.gridMonitores.count() < self.maxNumMonitors:
+			#if orw.filler[0] not in self.monitIds and self.gridMonitores.count() < self.maxNumMonitors:
+			if orw.filler[0] not in self.monitIds:
 				pos = len(self.monitIds)
 				self.monitores.append(MyMonitor())
 				self.addMonitor(self.monitores[pos])
 				self.monitIds[orw.filler[0]] = MonitorController(self.monitores[pos], orw.filler[0], self.alarmslist) 
 				self.monitores[pos].conecta(self, self.monitIds[orw.filler[0]])
 			else:
-				message = "Has reached maximum number of monitors: " + str(self.maxNumMonitors)
-				self.ui.statusbar.showMessage(message)
+				#message ="Has reached maximum number of monitors: " + str(self.maxNumMonitors)
+				#self.ui.statusbar.showMessage(message)
 				if orw.filler[0] == self.iController.ident:
 					self.iController.addPaciente(patient_factory.create_patient(oru_wav_factory.create_oru(data).segments))
 			
+			if self.gridMonitores.count() >= self.maxNumMonitors:
+				message ="Has reached maximum number of monitors: " + str(self.maxNumMonitors)
+				self.ui.statusbar.showMessage(message)
+				print self.countTest
+				self.countTest = self.countTest + 1
+
 			self.monitIds[orw.filler[0]].addPaciente(objPatient)
 	
 	#ack message sent when data is received
@@ -178,10 +188,11 @@ class MainWindow(QMainWindow):
 		self.monitores.remove(controller.gui)
 		self.gridMonitores.removeWidget(controller.gui)
 		controller.gui.deleteLater()
-		
 		#message = "Monitor removed"
 		#self.ui.statusbar.showMessage(message)
-		
+
+	def organizeMonitors(self):
+		pass
 
 	def trocaControle(self, fonte):
 		#self.controller = fonte.controller
