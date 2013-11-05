@@ -59,6 +59,7 @@ class MainWindow(QMainWindow):
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinOxi_3.text(), self.configForm.alarmForm.ui.edtMaxOxi_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinTemp_3.text(), self.configForm.alarmForm.ui.edtMaxTemp_3.text()])
 		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinFc_3.text(), self.configForm.alarmForm.ui.edtMaxFc_3.text()])
+		self.configForm.alarmForm.connectAlarm(self)
 
 
 	def openConnection(self):
@@ -111,7 +112,14 @@ class MainWindow(QMainWindow):
 		self.ui.statusbar.showMessage("Connection OFF")
 
 	def alarmChanged(self, field, value):
-		setattr(self.iController.alarms, field, int(value))
+		if self.iController.alarms:
+			setattr(self.iController.alarms, field, int(value))
+		self.alarmslist = []
+		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinPres_3.text(), self.configForm.alarmForm.ui.edtMaxPres_3.text()])
+		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinOxi_3.text(), self.configForm.alarmForm.ui.edtMaxOxi_3.text()])
+		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinTemp_3.text(), self.configForm.alarmForm.ui.edtMaxTemp_3.text()])
+		self.alarmslist.append([self.configForm.alarmForm.ui.edtMinFc_3.text(), self.configForm.alarmForm.ui.edtMaxFc_3.text()])
+			
 
 	def atualizaIndividual(self):
 		self.iController.atualizaGui()
