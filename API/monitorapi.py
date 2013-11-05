@@ -2,6 +2,7 @@ from twisted.internet import protocol
 from twisted.internet.task import LoopingCall
 
 class ICUMonitor(protocol.Protocol):
+	MAX_LENGTH = 200000
 	
 	def __init__(self, gui_msg_callback):
 		self.msg_callback = gui_msg_callback

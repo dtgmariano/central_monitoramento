@@ -4,7 +4,7 @@ class GenPlotter:
 		self.lim = lim
 		self.yax = []
 		self.xax = []
-		self.count = 30
+		self.count = 25
 
 	def atualiza(self, data):
 		self.yax += data
@@ -17,7 +17,7 @@ class GenPlotter:
 	def ajustaEixo(self, ini, tam, span):
 		if self.count == 0:
 			self.chart.setXRange(ini, ini + tam + span)
-			self.count = 30
+			self.count = 25
 		else:
 			self.count -= 1
 

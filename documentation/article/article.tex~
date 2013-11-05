@@ -21,8 +21,8 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 \usepackage{tabularx}
+\usepackage{tabu}
 \usepackage{booktabs}
-\usepackage{graphicx}
 
 \begin{document}
 
@@ -74,32 +74,29 @@ The methodology goes here.
  - Montar um diagrama de blocos
  - Dividir em duas partes: Simulador de sinais vitais e central de monitoramento
 
-\subsection{Programming}
-
-\subsubsection{Python}
-Python description
-
-\subsubsection{Twisted}
-Twisted description
+\subsection{Programming tools}
 
 \subsubsection{PyQt}
 PyQt4 is a blending of Python programming language and the Qt library. Consists on a toolkit for creating GUI applications and it is implemented as a set of Python modules. Qt is a cross-platform application development framework, that is implemented in C++ and possesses objected-oriented concepts. The tool enables the creation of an interface with different visual objects such as labels, text boxes, buttons, and graphics in order to meet the needs of the current project.
 
 \subsection{Vital signs simulator}
-
  - Apresentar o que é um monitor multiparamétrico\\
  - Quais são os principais sinais vitais monitorados\\
  - Descrição de como foi desenvolvido\\
  - Desenvolvimento de API's\\
  - Desenvolvimento da interface\\
-\subsubsection{Graphical User Interface}
-Consists of a form that displays simulated data of a patient: Patient's name, blood pressure, SpO2(saturation of peripheral oxygen), temperature, heart rate and monitor's ID, are displayed on seperate text labels while the patient's EKG data is presented in graphic view. When the monitor simulator application starts running it initiates the patient's monitor. While in execution the program keeps updating the application view with patient's measures.
 
 \subsection{Central monitoring}
  - Desenvolvimento de API's\\
  - Desenvolvimento da interface\\
- 
-\subsubsection{Graphical User Interface}
+
+\subsection{Interface}
+The application has two interfaces: one is the monitor simulator and the other is the central monitor.
+
+\subsubsection{Monitor Simulator}
+Consists of a form that displays simulated data of a patient: Patient's name, blood pressure, SpO2(saturation of peripheral oxygen), temperature, heart rate and monitor's ID, are displayed on seperate text labels while the patient's EKG data is presented in graphic view. When the monitor simulator application starts running it initiates the patient's monitor. While in execution the program keeps updating the application view with patient's measures.
+
+\subsubsection{Central Monitor}
 The ICU Monitoring Center is the main interface of the application. In the center is the main part of the application: the central monitors, the detailed view of the monitor and for last the settings. Those options can be switched through tabs. At the monitors The central display provides data for each instantiated monitor as soon as they establish connection. The monitors are arranged in tabular form. The idea is that the user can see a brief of data for each patient and observe whether each parameter is within the specified limits. If one reaches a given threshold value that was previously provided, a visual alarm is issued in order to highlight the region that contains the information of this patient. The specific parameter that triggered the alarm is also highlighted in order to inform the user which is the parameter that is in critical condition. 
 
 At the top of the window there is a menu bar where is possible to open or close the connection with the network and at the bottom of the form, a status bar provides information regarding the connection
@@ -121,39 +118,27 @@ The following table shows the segments required to compose an specific form of O
 
 
 \begin{table}[ht] 
-\caption{Required segments} % title of Table 
+\caption{Nonlinear Model Results} % title of Table 
 \centering % used for centering table 
-\begin{tabular}{l l} % centered columns (4 columns) 
+\begin{tabularx}{\textwidth}{l l} % centered columns (4 columns) 
+\hline\hline %inserts double horizontal lines 
 Segment & Purpose\\[0.5ex] % inserts table 
 %heading 
-\hline  % inserts single horizontal line 
-\\[0.1ex]
-MSH       & The header, containing the type of message, field\\[0.5ex] 
-          & delimiters, participant devices and the date\\[1.5ex] 
-PID       & The patient identification, containing the name \\[0.5ex] 
-          & and unique ID\\[1.5ex] 
-OBR       & The observation description, including the filler\\[0.5ex] 
-          & and requester ids\\[1.5ex] 
-OBX - CD  & The first observation containing the waveform\\[0.5ex] 
-          & channel details, like range and measurement units\\[1.5ex] 
-OBX - DTM & The second observation containing the sample\\[0.5ex] 
-          & time information\\[1.5ex] 
-OBX - NA  & The last observation containing a sequence of\\ [0.5ex] % [1ex] adds vertical space 
-          & data\\
-\end{tabular} 
+\hline % inserts single horizontal line 
+MSH & The header, containing the type of message, field delimiters, participant devices and the date \\
+PID & The patient identification, containing the name and unique ID \\
+OBR & The observation description, including the filler and requester ids \\
+OBX - CD & The first observation containing the waveform channel details, like range and measurement units \\
+OBX - DTM & The second observation containing the sample time information \\
+OBX - NA & The last observation containing a sequence of data \\ [0.5ex] % [1ex] adds vertical space 
+\hline %inserts single line 
+\end{tabularx} 
 \label{table:nonlin} % is used to refer this table in the text 
 \end{table}
 
 \subsubsection{Message Parser}
 In the application, a parser handle the creation of messages from application domain objects, and the converse as well. One class called Patient is used in the application to hold the data of the vital signals, objects of this class are created in a vital signal simulator and then turned into message by the parse. While in the monitoring center the message is received and then converted to Patient using the parser again.
 The following class diagram shows the architecture of the data organization and message creation, note that only important methods and attributes are shown, for brevity sake.
-
-\begin{figure}[!htbp]
-\begin{center}
-{\includegraphics[scale = 0.5]{images/hl7.png}}
-
-\end{center}
-\end{figure}
 
 \section{Results}
 The results goes here.\\

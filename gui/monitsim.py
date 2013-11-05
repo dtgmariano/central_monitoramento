@@ -56,8 +56,8 @@ class MonitSim(QWidget):
 	#Initiates the monitor
 	def turnOn(self):
 		self.loop = LoopingCall(self.genMeasure)
-		self.loop.start(0.3) #Starts function that generates measures
-		self.monitw.startsend(self.reactor, 0.3) #Starts function that sends data to the icu center
+		self.loop.start(0.2) #Starts function that generates measures
+		self.monitw.startsend(self.reactor, 0.2) #Starts function that sends data to the icu center
 
 	#Generates new measures from the patient
 	def genMeasure(self):
