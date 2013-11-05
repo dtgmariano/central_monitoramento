@@ -1,0 +1,12 @@
+# Fdb version 3
+["pdflatex"] 1383395678 "ieee_template.tex" "ieee_template.pdf" "ieee_template" 
+  "/usr/share/texmf-texlive/tex/latex/psnfss/ot1phv.fd" 1137110629 1684 0ac4554419e828cf2c810306539da167 ""
+  "/usr/share/texmf-texlive/tex/latex/psnfss/ot1ppl.fd" 1137110629 961 06b773644d960aac68add40fcb596208 ""
+  "/usr/share/texmf-texlive/tex/latex/psnfss/upzd.fd" 1137110629 148 b2a94082cb802f90d3daf6dd0c7188a0 ""
+  "IEEEtran.cls" 1354044732 207390 d653df0f34cc52792528fb4a3b56093b ""
+  "ieee_template.aux" 1383395678 848 bab7c72e46febb77344c816b885d0473 ""
+  "ieee_template.tex" 1383395677 47751 afeb9722820daeb56d00d6d092309ccd ""
+  (generated)
+  "ieee_template.pdf"
+  "ieee_template.log"
+  "ieee_template.aux"
