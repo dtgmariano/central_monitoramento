@@ -1,31 +1,36 @@
 from twisted.internet import protocol
 from twisted.internet.task import LoopingCall
 
-class ICUMonitor(protocol.Protocol):
-	
-	def __init__(self, gui_msg_callback):
-		self.msg_callback = gui_msg_callback
+class ICUMonitor(protocol.Protocol):        
+        def __init__(self, gui_msg_callback):
+                self.msg_callback = gui_msg_callback
 
-	def connectionMade(self):		
-		self.transport.write(self.msg_callback())
-		self.transport.loseConnection()
+        def connectionMade(self):                
+                self.transport.write(self.msg_callback())
+                self.transport.loseConnection()
 
 class ICUMonitorFactory(protocol.ClientFactory):
-	def __init__(self, gui_msg_callback, gui_ip, gui_port):
-		self.ip = gui_ip
-		self.port = gui_port
-		self.msg_callback = gui_msg_callback
-		self.objmonit = None
+        def __init__(self, gui_msg_callback, gui_ip, gui_port):
+                self.ip = gui_ip
+                self.port = gui_port
+                self.msg_callback = gui_msg_callback
+                self.objmonit = None
 
-	def buildProtocol(self, addr):
-		return ICUMonitor(self.msg_callback)
+        def buildProtocol(self, addr):
+                return ICUMonitor(self.msg_callback)
 
-	def sendmsg(self, gui_reactor):
-		gui_reactor.connectTCP(self.ip, self.port, self)
+        def clientConnectionLost(self, connector, reason):
+                pass
+        
+        def clientConnectionFailed(self, connector, reason):
+                pass
 
-	def startsend(self, gui_reactor, timerep):
-		self.loop = LoopingCall(self.sendmsg, gui_reactor)
-		self.loop.start(timerep)
+        def sendmsg(self, gui_reactor):
+                gui_reactor.connectTCP(self.ip, self.port, self)
 
-	def stopsend(self):
-		self.loop.stop()
+        def startsend(self, gui_reactor, timerep):
+                self.loop = LoopingCall(self.sendmsg, gui_reactor)
+                self.loop.start(timerep)
+
+        def stopsend(self):
+                self.loop.stop()

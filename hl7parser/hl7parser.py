@@ -85,7 +85,8 @@ class obx(hl7_segment):
 	
 	def fill_chn_data(self, chn):
 		parts = self.data.split('^')
-		parts.remove('')
+		if '' in parts:
+			parts.remove('')
 		chn.bind_data(map(lambda x: int(x), parts))
 		
 	@staticmethod
@@ -199,11 +200,12 @@ class oru_wav_factory:
 	@staticmethod
 	def create_oru(msg_str):
 		str_segments = msg_str.split(ENDLINE)
-		str_segments.remove('')
+		#str_segments.remove('')
 		m_oru = oru_wav()
 		for str_seg in str_segments:
-			seg = hl7_segment_factory.create_segment(str_seg)
-			m_oru.segments.append(seg)
+			if str_seg != '':
+				seg = hl7_segment_factory.create_segment(str_seg)
+				m_oru.segments.append(seg)
 		m_oru.placer = m_oru.segments[2].placer
 		m_oru.filler = m_oru.segments[2].filler
 		return m_oru

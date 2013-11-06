@@ -33,7 +33,7 @@ class monitor_multi:
 		spo2 = gerador_simples(92,3)
 		spo2.info(1, '%O2', (0, 100), 'Oximetry', 1, 60)
 		cor = choice(self.ecgs)
-		ecg = gerador_arquivo('../resources/'+cor[1],1000,500,int)
+		ecg = gerador_arquivo('../resources/'+cor[1],256,300,int)
 		ecg.info(1, 'mv', (-1024,1024), 'D2', 1, 1000)
 		fc = gerador_simples(cor[0],5)
 		fc.info(1, 'BPM', (0,300), 'Cardiac Rate', 1, 60)
