@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, '../hl7parser')
 from hl7parser import channel
 class gerador:
 	def info(self, number, unit, limits, label, resolution,fs):

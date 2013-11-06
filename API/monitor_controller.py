@@ -23,7 +23,7 @@ class MonitorController(Controller):
 			paciente = self.fila.get()
 			self.setLabel(self.gui.ui.lbPaciente, paciente.name)
 			self.setLabel(self.gui.ui.lbMonitor, self.ident)
-			self.setLabel(self.gui.ui.lbECGStatus, '')
+			self.setLabel(self.gui.ui.lbECGStatus, 'Regular')
 			self.atualizaLabels(self.gui.ui, paciente)
 			self.atualizaAlarmes(paciente)
 		self.filaLock.release()

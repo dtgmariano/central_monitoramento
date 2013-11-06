@@ -7,7 +7,7 @@ from hl7parser import patient, measure, channel, oru_wav
 from random import choice
 class monitor_multi:
 	nomes = ['John', 'Clark','Peter', 'Stela', 'Marta', 'Richard', 'Eve', 'Adam']
-	ecgs = [(40, '.ecg_40'), (80, '.ecg_80'), (120, '.ecg_120'), (180, '.ecg_180')]
+	ecgs = [(47, '.ecg_40'), (80, '.ecg_80'), (120, '.ecg_120'), (180, '.ecg_180')]
 	def __init__(self,ip):
 		self.id = ip
 		self.geradores = self.create_gen()
@@ -27,7 +27,7 @@ class monitor_multi:
 		pressao = gerador_duplo(gerador_simples(120,5),gerador_simples(80,3))
 		pressao.gs1.info(1, 'pa', (0,300), 'Systolic', 1, 60)
 		pressao.gs2.info(2, 'pa', (0,300), 'Dyastolic', 1, 60)
-		temperatura = gerador_duplo(gerador_simples(38,3), gerador_simples(35,4))
+		temperatura = gerador_duplo(gerador_simples(36,3), gerador_simples(35,4))
 		temperatura.gs1.info(1, 'C', (0,100), 'Temperature CH1', 1, 60)
 		temperatura.gs2.info(2, 'C', (0,100), 'Temperature CH2', 1, 60)
 		spo2 = gerador_simples(92,3)
