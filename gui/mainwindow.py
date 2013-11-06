@@ -24,6 +24,7 @@ from hl7parser import patient, measure, channel, oru_wav, oru_wav_factory, patie
 from icucenterapi import ICUCenter, ICUServerFactory
 #Twisted imports
 from twisted.internet.task import LoopingCall
+from server_api import ICUServer
 from threading import Lock
 
 
@@ -78,9 +79,11 @@ class MainWindow(QMainWindow):
 		self.maxNumMonitors = int(self.configForm.ui.edtMaxMon.text()) #Number of maximum monitors
 		self.port = int(self.configForm.ui.edtPort.text()) #Port number
 		
-		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
-		self.server.start(self.reactor) #Starts server, listening on the specified port number
-
+#		self.server = ICUServerFactory(self.port, self.dataReceived, self.ackMsg) #Create server
+#		self.server.start(self.reactor) #Starts server, listening on the specified port number
+		self.server = ICUServer(reactor, self.port, self.dataReceived)
+		self.server.start()
+		
 		self.wthread = UiWorkingThread(self)
 		
 		self.connect(self.wthread, SIGNAL('setIndividual'), self.atualizaIndividual, Qt.QueuedConnection)
@@ -132,7 +135,7 @@ class MainWindow(QMainWindow):
 
 	#function that receives incoming data from twisted api
 	def dataReceived(self, data):
-		#print data
+		print data
 		orw = oru_wav_factory.create_oru(data)
 		if orw.filler[0] in self.monitIds and (not any(map(lambda x: isinstance(x,obx),orw.segments))):
 			self.removeMonitor(orw.filler[0])

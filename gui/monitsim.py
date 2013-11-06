@@ -12,11 +12,14 @@ from monitorapi import ICUMonitor, ICUMonitorFactory
 from twisted.internet.task import LoopingCall
 from monitor_multi import monitor_multi
 from gen_plotter import GenPlotter
+from client_api import ICUClient
 import time
 
-#ip = "192.168.2.10"
-#ip = '10.5.1.194'
+#ip = "192.168.2.10" Biolab
+#ip = '10.5.1.194' Biolab
 ip = 'localhost'
+#ip = '192.168.1.57' Hostel
+#ip = '10.42.0.12'
 port = 60000
 
 class MonitSim(QWidget):
@@ -31,8 +34,8 @@ class MonitSim(QWidget):
 		self.smsg = None
 		self.monit = monitor_multi(sys.argv[1])
 		#Twisted client api
-		self.monitw = ICUMonitorFactory(self.setmsg, self.ip, self.port) #Create client
-
+		#self.monitw = ICUMonitorFactory(self.setmsg, self.ip, self.port) #Create client
+		self.monitw = ICUClient(reactor, self.ip, self.port)
 
 	def closeEvent(self, event):
 		self.loop.stop()
@@ -56,14 +59,16 @@ class MonitSim(QWidget):
 	#Initiates the monitor
 	def turnOn(self):
 		self.loop = LoopingCall(self.genMeasure)
-		self.loop.start(0.2) #Starts function that generates measures
-		self.monitw.startsend(self.reactor, 0.2) #Starts function that sends data to the icu center
+		self.loop.start(0.3) #Starts function that generates measures
+#		self.monitw.startsend(self.reactor, 0.3) #Starts function that sends data to the icu center
+		self.monitw.start_sending(0.3)
 
 	#Generates new measures from the patient
 	def genMeasure(self):
 		self.monit.preenche() 
 		orw = self.monit.get_orw((sys.argv[1], 'CEN'))
-		self.smsg = orw.to_str()
+#		self.smsg = orw.to_str()
+		self.monitw.msg = orw.to_str()
 
 		#Creates strings with the measures
 		strTemp = str(self.monit.monitored.measures[0].channels[0].data).strip('[]') #Temp
