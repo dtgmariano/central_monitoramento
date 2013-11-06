@@ -17,9 +17,10 @@ import time
 
 #ip = "192.168.2.10" Biolab
 #ip = '10.5.1.194' Biolab
-ip = 'localhost'
+#ip = 'localhost'
 #ip = '192.168.1.57' Hostel
 #ip = '10.42.0.12'
+ip = '192.168.1.37'
 port = 60000
 
 class MonitSim(QWidget):
@@ -39,7 +40,7 @@ class MonitSim(QWidget):
 
 	def closeEvent(self, event):
 		self.loop.stop()
-		self.monitw.stopsend()
+		self.monitw.stop_sending()
 		time.sleep(1)
 		fecha = oru_wav((12312,'CEN'),(sys.argv[1], 'MON'))
 		p1 = patient(1,'Jonas Brothers')
@@ -47,8 +48,9 @@ class MonitSim(QWidget):
 		p1.add_measure(m1)
 		fecha.add_patient(p1)
 		fecha.fill_segments()
-		self.smsg = fecha.to_str()
-		self.monitw.sendmsg(self.reactor)
+		#self.smsg = fecha.to_str()
+		self.monitw.msg = fecha.to_str()
+		self.monitw.send_msg()
 		#time.sleep(5)
 		#self.reactor.stop()
 
