@@ -26,5 +26,3 @@ class ICUServerFactory(protocol.Factory):
 
 	def stop(self, gui_reactor):
 		self.conn.stopListening()
-		#gui_reactor.stopListening()
-		#gui_reactor.close()

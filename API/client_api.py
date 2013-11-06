@@ -1,6 +1,6 @@
 from twisted.internet import protocol
 from twisted.internet.task import LoopingCall
-from monitapi import ICUProtocol
+from protocol_api import ICUProtocol
 
 class ICUClient(protocol.ClientFactory):
 	def __init__(self, reactor, ip=None, port=None, rcv_callback=None):
@@ -35,8 +35,8 @@ class ICUClient(protocol.ClientFactory):
 		self.looping_func.stop()
 
 	def clientConnectionFailed(self, connector, reason):
-		print 'fail'
-
+		pass
+		
 	def clientConnectionLost(self, connector, reason):
 		pass
 
@@ -44,4 +44,5 @@ if __name__ == "__main__":
 	from twisted.internet import reactor
 	a = ICUClient(reactor)
 	a.set_msg("Hello!\nAgain!")
+	a.send_msg()
 	reactor.run()
