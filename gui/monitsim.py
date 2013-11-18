@@ -20,7 +20,7 @@ import time
 #ip = 'localhost'
 #ip = '192.168.1.57' Hostel
 #ip = '10.42.0.12'
-ip = '192.168.1.37'
+ip = '10.42.0.1'
 port = 60000
 
 class MonitSim(QWidget):
